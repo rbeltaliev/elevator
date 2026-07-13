@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint — Elevator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0a0c;
+  --bg-elevated:#111114;
+  --bg-card:#141417;
+  --bg-card-hover:#1a1a1f;
+  --border:#242428;
+  --border-light:#1c1c20;
+  --text:#f6f5f3;
+  --text-2:#a3a3ab;
+  --text-3:#68686f;
+  --accent:#ff5a1f;
+  --accent-hover:#ff7038;
+  --accent-light:rgba(255,90,31,.12);
+  --accent-muted:rgba(255,90,31,.35);
+  --success:#33d17a;
+  --success-light:rgba(51,209,122,.1);
+  --gold:#e0b04b;
+  --radius:10px;
+  --radius-lg:20px;
+  --radius-pill:100px;
+  --shadow-md:0 12px 40px rgba(0,0,0,.5);
+  --shadow-lg:0 30px 90px rgba(0,0,0,.6);
+}
+html{font-size:16px;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;min-height:100vh;background-image:radial-gradient(circle at 50% -10%, rgba(255,90,31,.08), transparent 45%);}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+a{color:inherit;}
+::selection{background:var(--accent);color:#0a0a0c;}
+
+.btn{font-family:'Inter',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;font-size:14px;padding:10px 20px;border-radius:var(--radius-pill);}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:#0a0a0c;}
+.btn-primary:hover{background:var(--accent-hover);box-shadow:0 6px 24px rgba(255,90,31,.35);}
+.btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+.btn-ghost:hover{background:var(--bg-card);color:var(--text);}
+
+.app-sidebar{width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;background:var(--bg-elevated);border-right:1px solid var(--border-light);padding:20px 16px;display:flex;flex-direction:column;}
+.sidebar-logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;text-decoration:none;color:var(--text);margin-bottom:24px;padding-left:8px;}
+.sidebar-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+.sidebar-batch-badge{font-size:11px;font-weight:600;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:5px 12px;margin-bottom:20px;display:inline-block;margin-left:8px;}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;}
+.sidebar-link{padding:10px 12px;border-radius:var(--radius);font-size:14px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px;text-decoration:none;transition:background .15s,color .15s;}
+.sidebar-link:hover{background:var(--bg-card);color:var(--text);}
+.sidebar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+.sidebar-back{color:var(--text-3);font-size:12px;text-decoration:none;margin-bottom:14px;padding-left:8px;display:inline-block;}
+.sidebar-back:hover{color:var(--text-2);}
+.sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:13px;}
+.sidebar-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a33a11);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0a0a0c;font-size:13px;flex-shrink:0;}
+.sidebar-user-name{font-weight:600;color:var(--text);}
+.sidebar-user-role{font-size:11px;color:var(--text-3);}
+
+.app-main{flex:1;min-width:0;}
+.app-topbar{height:64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-light);background:rgba(10,10,12,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 32px;}
+.app-topbar h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;}
+.topbar-pill{font-size:12px;font-weight:600;color:var(--text-2);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;display:inline-flex;align-items:center;gap:6px;}
+.app-content{padding:32px 32px 64px;max-width:1080px;}
+
+.sprint-goal{background:linear-gradient(180deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.sprint-goal-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+.sprint-goal-text{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:600;max-width:640px;line-height:1.35;}
+.sprint-goal-text span{color:var(--accent);}
+.sprint-days{text-align:center;flex-shrink:0;padding-left:24px;border-left:1px solid var(--border-light);}
+.sprint-days-num{font-size:34px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent);line-height:1;}
+.sprint-days-label{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;}
+
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:800px){.kanban{grid-template-columns:1fr;}}
+.kanban-col{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;}
+.kanban-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 2px;}
+.kanban-title{font-size:12.5px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--text-2);text-transform:uppercase;letter-spacing:.04em;}
+.kanban-count{font-size:11px;color:var(--text-3);background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius-pill);padding:2px 9px;}
+.kanban-card{background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius);padding:14px;margin-bottom:10px;font-size:13.5px;color:var(--text-2);text-decoration:none;display:block;transition:border-color .15s,background .15s;}
+.kanban-card:last-child{margin-bottom:0;}
+.kanban-card:hover{border-color:var(--accent-muted);background:var(--bg-card-hover);}
+.kanban-card-title{color:var(--text);font-weight:500;margin-bottom:10px;line-height:1.4;}
+.kanban-col.done .kanban-card-title{color:var(--text-3);text-decoration:line-through;text-decoration-color:var(--border);}
+.kanban-card-tag{font-size:10px;font-weight:600;color:var(--text-3);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-pill);padding:3px 9px;display:inline-block;}
+.kanban-card-tag.link{color:var(--accent);border-color:var(--accent-muted);background:var(--accent-light);}
+</style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <a href="index.html" class="sidebar-logo"><span class="dot"></span>Elevator</a>
+  <div class="sidebar-batch-badge">Batch #1 · Неделя 5/12</div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link">🚀 Dashboard</a>
+    <a href="progress-map.html" class="sidebar-link">🗺️ Карта прогресса</a>
+    <a href="roadmap.html" class="sidebar-link">🧭 Roadmap</a>
+    <a href="sprint.html" class="sidebar-link active">📋 Sprint</a>
+    <a href="calendar.html" class="sidebar-link">📅 Календарь</a>
+    <a href="mock-pitch.html" class="sidebar-link">🎤 Mock Pitch</a>
+    <a href="pitch-ready.html" class="sidebar-link">🏆 Pitch Ready</a>
+  </nav>
+  <a href="index.html" class="sidebar-back">← На сайт</a>
+  <div class="sidebar-footer">
+    <div class="sidebar-avatar">NM</div>
+    <div>
+      <div class="sidebar-user-name">Nova Metrics</div>
+      <div class="sidebar-user-role">Founder</div>
+    </div>
+  </div>
+</aside>
+
+<main class="app-main">
+  <div class="app-topbar">
+    <h1>Sprint · Неделя 5</h1>
+    <div class="topbar-pill">⏳ До ретро — 3 дня</div>
+  </div>
+
+  <div class="app-content">
+
+    <div class="sprint-goal">
+      <div>
+        <div class="sprint-goal-label">Цель недели</div>
+        <div class="sprint-goal-text">Закрыть <span>5 новых платящих клиентов</span> и обновить unit-экономику по итогам продаж</div>
+      </div>
+      <div class="sprint-days">
+        <div class="sprint-days-num">3</div>
+        <div class="sprint-days-label">дня до ретро</div>
+      </div>
+    </div>
+
+    <div class="kanban">
+      <div class="kanban-col">
+        <div class="kanban-head">
+          <div class="kanban-title">К выполнению</div>
+          <div class="kanban-count">3</div>
+        </div>
+        <a href="weekly-task.html" class="kanban-card">
+          <div class="kanban-card-title">Провести 5 клиентских интервью</div>
+          <span class="kanban-card-tag link">Customer Dev</span>
+        </a>
+        <div class="kanban-card">
+          <div class="kanban-card-title">Протестировать новую цену на 10 лидах</div>
+          <span class="kanban-card-tag">Pricing</span>
+        </div>
+        <div class="kanban-card">
+          <div class="kanban-card-title">Обновить unit-экономику в финмодели</div>
+          <span class="kanban-card-tag">Finance</span>
+        </div>
+      </div>
+
+      <div class="kanban-col">
+        <div class="kanban-head">
+          <div class="kanban-title">В работе</div>
+          <div class="kanban-count">2</div>
+        </div>
+        <div class="kanban-card">
+          <div class="kanban-card-title">Написать follow-up цепочку для 15 лидов из воронки</div>
+          <span class="kanban-card-tag">Sales</span>
+        </div>
+        <div class="kanban-card">
+          <div class="kanban-card-title">Собрать обратную связь от 3 действующих клиентов</div>
+          <span class="kanban-card-tag">Retention</span>
+        </div>
+      </div>
+
+      <div class="kanban-col done">
+        <div class="kanban-head">
+          <div class="kanban-title">Готово</div>
+          <div class="kanban-count">1</div>
+        </div>
+        <div class="kanban-card">
+          <div class="kanban-card-title">Обновить CRM по итогам звонков за неделю</div>
+          <span class="kanban-card-tag">Ops</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

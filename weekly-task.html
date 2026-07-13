@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задание недели — Elevator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0a0c;
+  --bg-elevated:#111114;
+  --bg-card:#141417;
+  --bg-card-hover:#1a1a1f;
+  --border:#242428;
+  --border-light:#1c1c20;
+  --text:#f6f5f3;
+  --text-2:#a3a3ab;
+  --text-3:#68686f;
+  --accent:#ff5a1f;
+  --accent-hover:#ff7038;
+  --accent-light:rgba(255,90,31,.12);
+  --accent-muted:rgba(255,90,31,.35);
+  --success:#33d17a;
+  --success-light:rgba(51,209,122,.1);
+  --gold:#e0b04b;
+  --radius:10px;
+  --radius-lg:20px;
+  --radius-pill:100px;
+  --shadow-md:0 12px 40px rgba(0,0,0,.5);
+  --shadow-lg:0 30px 90px rgba(0,0,0,.6);
+}
+html{font-size:16px;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;min-height:100vh;background-image:radial-gradient(circle at 50% -10%, rgba(255,90,31,.08), transparent 45%);}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+a{color:inherit;}
+::selection{background:var(--accent);color:#0a0a0c;}
+
+.btn{font-family:'Inter',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;font-size:14px;padding:10px 20px;border-radius:var(--radius-pill);}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:#0a0a0c;}
+.btn-primary:hover{background:var(--accent-hover);box-shadow:0 6px 24px rgba(255,90,31,.35);}
+.btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+.btn-ghost:hover{background:var(--bg-card);color:var(--text);}
+
+.app-sidebar{width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;background:var(--bg-elevated);border-right:1px solid var(--border-light);padding:20px 16px;display:flex;flex-direction:column;}
+.sidebar-logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;text-decoration:none;color:var(--text);margin-bottom:24px;padding-left:8px;}
+.sidebar-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+.sidebar-batch-badge{font-size:11px;font-weight:600;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:5px 12px;margin-bottom:20px;display:inline-block;margin-left:8px;}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;}
+.sidebar-link{padding:10px 12px;border-radius:var(--radius);font-size:14px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px;text-decoration:none;transition:background .15s,color .15s;}
+.sidebar-link:hover{background:var(--bg-card);color:var(--text);}
+.sidebar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+.sidebar-back{color:var(--text-3);font-size:12px;text-decoration:none;margin-bottom:14px;padding-left:8px;display:inline-block;}
+.sidebar-back:hover{color:var(--text-2);}
+.sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:13px;}
+.sidebar-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a33a11);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0a0a0c;font-size:13px;flex-shrink:0;}
+.sidebar-user-name{font-weight:600;color:var(--text);}
+.sidebar-user-role{font-size:11px;color:var(--text-3);}
+
+.app-main{flex:1;min-width:0;}
+.app-topbar{height:64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-light);background:rgba(10,10,12,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 32px;}
+.app-topbar h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;}
+.topbar-pill{font-size:12px;font-weight:600;color:var(--text-2);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;display:inline-flex;align-items:center;gap:6px;}
+.app-content{padding:32px 32px 64px;max-width:1080px;}
+
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;}
+
+.content-back{color:var(--text-3);font-size:12.5px;font-weight:600;text-decoration:none;margin-bottom:20px;display:inline-block;}
+.content-back:hover{color:var(--text-2);}
+
+.task-title{font-size:26px;margin-bottom:14px;}
+.task-meta{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
+.meta-pill{font-size:12px;font-weight:600;color:var(--text-2);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;display:inline-flex;align-items:center;gap:6px;}
+.meta-pill.due{color:var(--accent);border-color:var(--accent-muted);background:var(--accent-light);}
+
+.task-section{margin-bottom:28px;}
+.section-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;font-weight:600;}
+.task-desc{font-size:14.5px;color:var(--text-2);line-height:1.65;}
+.task-desc + .task-desc{margin-top:12px;}
+
+.instruction-list{list-style:none;counter-reset:step;}
+.instruction-list li{counter-increment:step;padding:12px 0 12px 40px;position:relative;border-bottom:1px solid var(--border-light);font-size:14px;color:var(--text-2);line-height:1.5;}
+.instruction-list li:last-child{border-bottom:none;padding-bottom:0;}
+.instruction-list li::before{content:counter(step);position:absolute;left:0;top:10px;width:24px;height:24px;border-radius:50%;background:var(--accent-light);border:1px solid var(--accent-muted);color:var(--accent);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;}
+
+.upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius-lg);padding:32px;text-align:center;color:var(--text-3);font-size:13.5px;margin-bottom:16px;cursor:pointer;transition:border-color .15s,color .15s;}
+.upload-zone:hover{border-color:var(--accent-muted);color:var(--text-2);}
+.upload-icon{font-size:22px;margin-bottom:8px;}
+.upload-hint{font-size:11.5px;color:var(--text-3);margin-top:4px;}
+
+textarea{width:100%;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);padding:14px;color:var(--text);font-family:'Inter',sans-serif;font-size:13.5px;resize:vertical;min-height:100px;margin-bottom:18px;}
+textarea::placeholder{color:var(--text-3);}
+textarea:focus{outline:none;border-color:var(--accent-muted);}
+.textarea-label{font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:8px;display:block;}
+
+.feed-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border-light);}
+.feed-item:last-child{border-bottom:none;padding-bottom:0;}
+.feed-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a33a11);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0a0a0c;font-size:12px;flex-shrink:0;}
+.feed-body{flex:1;}
+.feed-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.feed-name{font-size:13px;font-weight:600;}
+.feed-time{font-size:11px;color:var(--text-3);}
+.feed-text{font-size:13.5px;color:var(--text-2);line-height:1.5;}
+</style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <a href="index.html" class="sidebar-logo"><span class="dot"></span>Elevator</a>
+  <div class="sidebar-batch-badge">Batch #1 · Неделя 5/12</div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link">🚀 Dashboard</a>
+    <a href="progress-map.html" class="sidebar-link">🗺️ Карта прогресса</a>
+    <a href="roadmap.html" class="sidebar-link">🧭 Roadmap</a>
+    <a href="sprint.html" class="sidebar-link active">📋 Sprint</a>
+    <a href="calendar.html" class="sidebar-link">📅 Календарь</a>
+    <a href="mock-pitch.html" class="sidebar-link">🎤 Mock Pitch</a>
+    <a href="pitch-ready.html" class="sidebar-link">🏆 Pitch Ready</a>
+  </nav>
+  <a href="index.html" class="sidebar-back">← На сайт</a>
+  <div class="sidebar-footer">
+    <div class="sidebar-avatar">NM</div>
+    <div>
+      <div class="sidebar-user-name">Nova Metrics</div>
+      <div class="sidebar-user-role">Founder</div>
+    </div>
+  </div>
+</aside>
+
+<main class="app-main">
+  <div class="app-topbar">
+    <h1>Задание недели</h1>
+    <div class="topbar-pill">📋 Sprint · Неделя 5</div>
+  </div>
+
+  <div class="app-content">
+
+    <a href="sprint.html" class="content-back">← Sprint · Неделя 5</a>
+
+    <h1 class="task-title">Провести 5 клиентских интервью</h1>
+    <div class="task-meta">
+      <div class="meta-pill">Customer Dev</div>
+      <div class="meta-pill due">⏳ Срок: пятница, 17 июля</div>
+    </div>
+
+    <div class="task-section">
+      <div class="section-label">Описание</div>
+      <div class="task-desc">На неделе 5 команда переходит от разовых продаж к устойчивому потоку клиентов. Прежде чем масштабировать привлечение, нужно понять, почему часть купивших клиентов не возвращается ко второй оплате.</div>
+      <div class="task-desc">Проведите 5 интервью: 3 с активными платящими клиентами и 2 с теми, кто отменил подписку или не продлил. Цель — собрать конкретные формулировки боли и причин оттока, а не общие впечатления. Эти данные пойдут напрямую в unit-экономику и в питч-дек как доказательство PMF.</div>
+    </div>
+
+    <div class="task-section">
+      <div class="section-label">Инструкция</div>
+      <ol class="instruction-list">
+        <li>Соберите список из 8–10 кандидатов из CRM: 5 активных клиентов с высоким и низким использованием продукта, 3–5 отменивших подписку.</li>
+        <li>Договоритесь о звонках на 20–25 минут, используйте скрипт customer development — открытые вопросы, без наводящих формулировок.</li>
+        <li>Зафиксируйте дословные цитаты о том, что заставило купить, что мешает пользоваться регулярно и что стало причиной отказа.</li>
+        <li>Загрузите транскрипты или заметки и кратко резюмируйте выводы в комментарии ниже — это войдёт в отчёт для ментора.</li>
+      </ol>
+    </div>
+
+    <div class="task-section">
+      <div class="section-label">Результат</div>
+      <div class="upload-zone">
+        <div class="upload-icon">📎</div>
+        <div>Перетащите файлы сюда или нажмите, чтобы загрузить</div>
+        <div class="upload-hint">Транскрипты, заметки, аудиозаписи — PDF, DOCX, MP3</div>
+      </div>
+      <label class="textarea-label" for="result-comment">Комментарий к результату</label>
+      <textarea id="result-comment" placeholder="Кратко: что узнали, какие паттерны повторяются, что меняем в продукте или воронке..."></textarea>
+      <button class="btn btn-primary">Отправить результат</button>
+    </div>
+
+    <div class="task-section">
+      <div class="section-label">Комментарий ментора</div>
+      <div class="panel">
+        <div class="feed-item">
+          <div class="feed-avatar">ЕВ</div>
+          <div class="feed-body">
+            <div class="feed-head"><div class="feed-name">Елена Воронцова</div><div class="feed-time">2 дня назад</div></div>
+            <div class="feed-text">Обязательно возьмите минимум двух отменивших — на прошлой неделе вы говорили только с довольными клиентами, а инвесткомитет спросит именно про отток. Отдельно зафиксируйте, на каком шаге они «отваливаются» в продукте.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

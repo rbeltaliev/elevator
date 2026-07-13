@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elevator — Batch #1 · Приём заявок открыт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0a0c;
+    --bg-elevated:#111114;
+    --bg-card:#141417;
+    --bg-card-hover:#1a1a1f;
+    --border:#242428;
+    --border-light:#1c1c20;
+    --text:#f6f5f3;
+    --text-2:#a3a3ab;
+    --text-3:#68686f;
+    --accent:#ff5a1f;
+    --accent-hover:#ff7038;
+    --accent-light:rgba(255,90,31,.12);
+    --accent-muted:rgba(255,90,31,.35);
+    --success:#33d17a;
+    --success-light:rgba(51,209,122,.1);
+    --gold:#e0b04b;
+    --radius:10px;
+    --radius-lg:20px;
+    --radius-pill:100px;
+    --shadow-md:0 12px 40px rgba(0,0,0,.5);
+    --shadow-lg:0 30px 90px rgba(0,0,0,.6);
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    background-image:radial-gradient(circle at 50% -10%, rgba(255,90,31,.10), transparent 45%);
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+  /* ── NAV ── */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;height:64px;
+    background:rgba(10,10,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border-light);
+    display:flex;align-items:center;padding:0 24px;
+  }
+  .nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px;}
+  .nav-logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;text-decoration:none;color:var(--text);flex-shrink:0;}
+  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+  .nav-spacer{flex:1;}
+  .nav-links{display:none;align-items:center;gap:2px;}
+  .nav-link{font-size:14px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 14px;border-radius:var(--radius-pill);transition:background .15s,color .15s;}
+  .nav-link:hover{background:var(--bg-card);color:var(--text);}
+  .btn{font-family:'Inter',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-nav{font-size:14px;padding:9px 18px;border-radius:var(--radius-pill);}
+  .btn-primary{background:var(--accent);color:#0a0a0c;}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 6px 24px rgba(255,90,31,.35);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--bg-card);color:var(--text);}
+  @media(min-width:860px){.nav-links{display:flex;}}
+
+  /* ── HERO ── */
+  .hero{padding:168px 24px 90px;text-align:center;max-width:900px;margin:0 auto;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);
+    background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);
+    padding:6px 16px 6px 12px;margin-bottom:32px;letter-spacing:.01em;
+  }
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);position:relative;}
+  .eyebrow .pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--accent);animation:pulse 1.8s ease-out infinite;}
+  @keyframes pulse{0%{transform:scale(.6);opacity:1;}100%{transform:scale(1.9);opacity:0;}}
+  .hero-title{font-size:clamp(48px,9vw,88px);font-weight:700;line-height:.98;margin-bottom:6px;}
+  .hero-title span{color:var(--accent);}
+  .hero-batch{font-size:clamp(18px,3vw,22px);font-weight:600;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:44px;}
+
+  .countdown{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:40px;}
+  .countdown-label{font-size:13px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;}
+  .countdown-grid{display:flex;gap:10px;}
+  .countdown-box{
+    background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+    width:76px;padding:14px 0 10px;text-align:center;
+  }
+  .countdown-num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text);}
+  .countdown-unit{font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+  .countdown-date{font-size:13px;color:var(--text-3);margin-top:4px;}
+
+  .hero-cta{margin-bottom:36px;}
+  .btn-hero{font-size:16px;padding:15px 34px;border-radius:var(--radius-pill);}
+  .hero-desc{font-size:17px;line-height:1.6;color:var(--text-2);max-width:560px;margin:0 auto;}
+
+  /* ── ECOSYSTEM STRIP ── */
+  .ecosystem{padding:0 24px 100px;}
+  .ecosystem-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
+  .eco-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 18px;text-align:center;}
+  .eco-dot{width:10px;height:10px;border-radius:50%;background:var(--border);}
+  .eco-step.active .eco-dot{background:var(--accent);box-shadow:0 0 14px var(--accent);}
+  .eco-name{font-size:13px;font-weight:600;color:var(--text-3);}
+  .eco-step.active .eco-name{color:var(--text);}
+  .eco-sub{font-size:11px;color:var(--text-3);}
+  .eco-arrow{color:var(--border);font-size:16px;padding:0 4px 20px;}
+
+  /* ── SECTION ── */
+  .section{padding:96px 24px;border-top:1px solid var(--border-light);}
+  .section-inner{max-width:920px;margin:0 auto;}
+  .section-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;}
+  .section-title{font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:16px;line-height:1.15;}
+  .section-desc{font-size:17px;color:var(--text-2);line-height:1.6;max-width:640px;margin-bottom:48px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ── WHO: not-list / requirements ── */
+  .not-list{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;}
+  .not-item{display:flex;align-items:center;gap:14px;font-size:17px;color:var(--text-3);}
+  .not-item .x{width:22px;height:22px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-3);}
+  .not-item span.strike{text-decoration:line-through;text-decoration-color:var(--border);}
+
+  .yes-card{
+    background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:32px;margin-bottom:32px;
+  }
+  .yes-card-title{font-size:20px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:8px;color:var(--text);}
+  .yes-card-title .check{color:var(--success);}
+  .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px;}
+  .req-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-2);background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius);padding:12px 14px;}
+  .req-item .ico{color:var(--accent);font-size:14px;}
+  .hard-line{font-size:16px;font-weight:600;color:var(--text);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius);padding:16px 20px;display:inline-block;}
+
+  /* ── WHAT HAPPENS ── */
+  .big-statement{font-size:clamp(22px,3.2vw,30px);font-weight:600;font-family:'Space Grotesk',sans-serif;line-height:1.35;margin-bottom:48px;color:var(--text);}
+  .big-statement .muted{color:var(--text-3);}
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border-light);border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;}
+  .work-item{background:var(--bg-card);padding:22px 20px;font-size:14.5px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:12px;transition:background .15s,color .15s;}
+  .work-item:hover{background:var(--bg-card-hover);color:var(--text);}
+  .work-item .n{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text-3);}
+  .note{font-size:15px;color:var(--text-3);font-style:normal;}
+
+  /* ── RESULT ── */
+  .result-grid{display:flex;flex-direction:column;gap:2px;margin-bottom:44px;}
+  .result-item{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);font-size:16px;font-weight:500;}
+  .result-item .check{width:26px;height:26px;border-radius:50%;background:var(--success-light);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+  .result-final{text-align:center;padding:44px 24px;background:linear-gradient(180deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--border);border-radius:var(--radius-lg);}
+  .result-final .no{font-size:15px;color:var(--text-3);text-decoration:line-through;margin-bottom:4px;}
+  .result-final .no + .no{margin-bottom:14px;}
+  .result-final .yes{font-size:26px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent);margin-top:8px;}
+
+  /* ── ELEVATOR PITCH ── */
+  .pitch-section{background:var(--bg-elevated);}
+  .role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:36px;}
+  .role-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 20px;text-align:center;}
+  .role-icon{font-size:26px;margin-bottom:12px;}
+  .role-name{font-size:15px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:4px;}
+  .role-desc{font-size:12.5px;color:var(--text-3);}
+  .pitch-line{font-size:18px;color:var(--text-2);line-height:1.6;max-width:640px;}
+  .pitch-line strong{color:var(--text);}
+
+  /* ── TIMELINE / HOW ── */
+  .stepper{display:flex;flex-direction:column;}
+  .step{display:flex;gap:20px;position:relative;padding-bottom:36px;}
+  .step:last-child{padding-bottom:0;}
+  .step-marker{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+  .step-dot{width:34px;height:34px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--text-2);}
+  .step:nth-last-child(2) .step-dot,.step:last-child .step-dot{background:var(--accent);border-color:var(--accent);color:#0a0a0c;}
+  .step-line{width:1px;flex:1;background:var(--border);margin-top:6px;}
+  .step-body{padding-top:4px;}
+  .step-title{font-size:17px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:4px;}
+  .step-desc{font-size:14px;color:var(--text-3);}
+
+  /* ── PRINCIPLES ── */
+  .principle-row{display:flex;flex-direction:column;gap:2px;margin-bottom:36px;}
+  .principle-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:16px 20px;font-size:15px;color:var(--text-2);}
+  .principle-item b{color:var(--text);}
+  .example-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .example-tag{font-size:13px;font-weight:500;color:var(--text-2);background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius-pill);padding:8px 16px;}
+
+  /* ── MENTORS ── */
+  .mentor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;}
+  .mentor-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:border-color .15s,transform .15s;}
+  .mentor-card:hover{border-color:var(--accent-muted);transform:translateY(-3px);}
+  .mentor-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a33a11);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0a0a0c;font-size:17px;margin-bottom:16px;}
+  .mentor-name{font-size:16px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:2px;}
+  .mentor-role{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:10px;}
+  .mentor-desc{font-size:13.5px;color:var(--text-3);line-height:1.5;}
+
+  /* ── BATCH BLOCK ── */
+  .batch-card{background:var(--bg-card);border:1px solid var(--accent-muted);border-radius:var(--radius-lg);padding:44px;position:relative;overflow:hidden;}
+  .batch-card::before{content:'';position:absolute;top:-40%;right:-20%;width:340px;height:340px;background:radial-gradient(circle,rgba(255,90,31,.18),transparent 70%);}
+  .batch-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px;position:relative;}
+  .batch-num{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;}
+  .batch-tag{font-size:12px;font-weight:700;color:#0a0a0c;background:var(--accent);border-radius:var(--radius-pill);padding:5px 14px;text-transform:uppercase;letter-spacing:.05em;}
+  .batch-dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;position:relative;}
+  .batch-date-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+  .batch-date-value{font-size:19px;font-weight:600;font-family:'Space Grotesk',sans-serif;}
+  .batch-date-value.warn{color:var(--accent);}
+
+  /* ── FAQ ── */
+  .faq-item{border-bottom:1px solid var(--border-light);}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 4px;cursor:pointer;font-size:16px;font-weight:600;font-family:'Space Grotesk',sans-serif;}
+  .faq-q .plus{font-size:20px;color:var(--text-3);transition:transform .2s;flex-shrink:0;margin-left:16px;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--accent);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-item.open .faq-a{max-height:200px;}
+  .faq-a-inner{padding:0 4px 22px;font-size:15px;color:var(--text-2);line-height:1.6;}
+
+  /* ── GALLERY / SCREENS ── */
+  .screens-section{background:var(--bg-elevated);}
+  .screens-eyebrow-row{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin:28px 0 12px;}
+  .screens-eyebrow-row:first-of-type{margin-top:0;}
+  .screens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+  .screen-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none;display:block;transition:transform .15s,border-color .15s;}
+  .screen-card:hover{transform:translateY(-4px);border-color:var(--accent-muted);}
+  .screen-preview{height:100px;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--bg-elevated);border-bottom:1px solid var(--border-light);}
+  .screen-info{padding:16px 18px;}
+  .screen-name{font-size:14.5px;font-weight:600;margin-bottom:3px;}
+  .screen-desc{font-size:12.5px;color:var(--text-3);}
+
+  /* ── CTA BOTTOM ── */
+  .cta-bottom{padding:110px 24px;text-align:center;}
+  .cta-bottom-title{font-size:clamp(28px,5vw,44px);font-weight:700;margin-bottom:16px;line-height:1.15;}
+  .cta-bottom-desc{font-size:17px;color:var(--text-2);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;}
+
+  /* ── APPLY FORM ── */
+  .apply-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  @media(max-width:640px){.form-row{grid-template-columns:1fr;}}
+  .form-field{display:flex;flex-direction:column;gap:8px;}
+  .form-field.full{grid-column:1/-1;}
+  .form-field label{font-size:13px;font-weight:600;color:var(--text-2);}
+  .form-field input,.form-field textarea{
+    background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);
+    padding:12px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;
+    transition:border-color .15s;
+  }
+  .form-field input:focus,.form-field textarea:focus{border-color:var(--accent-muted);}
+  .form-field textarea{resize:vertical;min-height:80px;}
+  .form-hint{font-size:12px;color:var(--text-3);margin-top:20px;}
+  .form-hint b{color:var(--text-2);}
+
+  /* ── FOOTER ── */
+  .footer{padding:56px 24px 40px;text-align:center;border-top:1px solid var(--border-light);}
+  .footer-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);margin-bottom:14px;}
+  .footer-logo .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .footer-note{font-size:13px;color:var(--text-3);}
+
+  ::selection{background:var(--accent);color:#0a0a0c;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span class="dot"></span>Elevator</a>
+    <div class="nav-spacer"></div>
+    <div class="nav-links">
+      <a href="#who" class="nav-link">Кто участвует</a>
+      <a href="#program" class="nav-link">Программа</a>
+      <a href="#how" class="nav-link">Как проходит</a>
+      <a href="#mentors" class="nav-link">Менторы</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+    <a href="#apply" class="btn btn-nav btn-primary">Подать заявку</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="eyebrow"><span class="pulse"></span>Batch #1 · Приём заявок открыт</div>
+  <h1 class="hero-title">Elevator</h1>
+  <div class="hero-batch">Batch #1</div>
+
+  <div class="countdown">
+    <div class="countdown-label">До окончания приёма заявок</div>
+    <div class="countdown-grid" id="countdown">
+      <div class="countdown-box"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit">дней</div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-unit">часов</div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-unit">минут</div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">секунд</div></div>
+    </div>
+    <div class="countdown-date">1 сентября 2026</div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#apply" class="btn btn-primary btn-hero">Подать заявку →</a>
+  </div>
+
+  <p class="hero-desc">Программа для IT-стартапов, которые уже создали MVP и хотят пройти путь от первых пользователей до первой выручки.</p>
+</section>
+
+<!-- ── ECOSYSTEM STRIP ── -->
+<div class="ecosystem">
+  <div class="ecosystem-inner">
+    <div class="eco-step">
+      <div class="eco-dot"></div>
+      <div class="eco-name">Sandbox</div>
+      <div class="eco-sub">Собери MVP</div>
+    </div>
+    <div class="eco-arrow">→</div>
+    <div class="eco-step active">
+      <div class="eco-dot"></div>
+      <div class="eco-name">Elevator</div>
+      <div class="eco-sub">Стань бизнесом</div>
+    </div>
+    <div class="eco-arrow">→</div>
+    <div class="eco-step">
+      <div class="eco-dot"></div>
+      <div class="eco-name">Elevator Pitch</div>
+      <div class="eco-sub">Публичная защита</div>
+    </div>
+    <div class="eco-arrow">→</div>
+    <div class="eco-step">
+      <div class="eco-dot"></div>
+      <div class="eco-name">brainbox_I</div>
+      <div class="eco-sub">Инвестиции</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── КТО МОЖЕТ УЧАСТВОВАТЬ ── -->
+<section class="section" id="who">
+  <div class="section-inner">
+    <div class="section-label">Кто может участвовать</div>
+    <h2 class="section-title">Программа не для идеи</h2>
+    <p class="section-desc">Elevator — это не старт бизнеса с нуля. Это разгон уже существующего продукта.</p>
+
+    <div class="not-list">
+      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для идеи</span></div>
+      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для презентации</span></div>
+      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для студентов</span></div>
+    </div>
+
+    <div class="yes-card">
+      <div class="yes-card-title"><span class="check">✓</span> Подаваться могут только проекты с готовым MVP</div>
+      <p style="font-size:14.5px;color:var(--text-3);">Во время подачи заявки обязательно прикладывается:</p>
+      <div class="req-grid">
+        <div class="req-item"><span class="ico">●</span>Ссылка на работающий MVP</div>
+        <div class="req-item"><span class="ico">●</span>Демо продукта</div>
+        <div class="req-item"><span class="ico">●</span>GitHub (если применимо)</div>
+        <div class="req-item"><span class="ico">●</span>Видео демонстрация</div>
+      </div>
+    </div>
+
+    <div class="hard-line">Без MVP заявка не рассматривается.</div>
+  </div>
+</section>
+
+<!-- ── ЧТО ПРОИСХОДИТ В ПРОГРАММЕ ── -->
+<section class="section" id="program">
+  <div class="section-inner">
+    <div class="section-label">Что происходит в программе</div>
+    <p class="big-statement"><span class="muted">Мы не продаём обучение.</span><br>Мы устраняем причины, по которым инвестор пока говорит стартапу «нет».</p>
+
+    <div class="work-grid">
+      <div class="work-item"><span class="n">01</span>Поиск первых пользователей</div>
+      <div class="work-item"><span class="n">02</span>Customer Development</div>
+      <div class="work-item"><span class="n">03</span>Первые платящие клиенты</div>
+      <div class="work-item"><span class="n">04</span>Product Market Fit</div>
+      <div class="work-item"><span class="n">05</span>Первые регулярные продажи</div>
+      <div class="work-item"><span class="n">06</span>Unit Economics</div>
+      <div class="work-item"><span class="n">07</span>Финансовая модель</div>
+      <div class="work-item"><span class="n">08</span>Инвестиционная упаковка</div>
+      <div class="work-item"><span class="n">09</span>Подготовка к Elevator Pitch</div>
+    </div>
+    <p class="note">Каждая неделя программы посвящена устранению очередного ограничения роста.</p>
+  </div>
+</section>
+
+<!-- ── РЕЗУЛЬТАТ ── -->
+<section class="section" id="result">
+  <div class="section-inner">
+    <div class="section-label">Результат программы</div>
+    <h2 class="section-title">После окончания стартап получает</h2>
+
+    <div class="result-grid">
+      <div class="result-item"><span class="check">✓</span>Подтверждённый спрос</div>
+      <div class="result-item"><span class="check">✓</span>Первых пользователей</div>
+      <div class="result-item"><span class="check">✓</span>Первую выручку</div>
+      <div class="result-item"><span class="check">✓</span>Инвестиционную упаковку</div>
+      <div class="result-item"><span class="check">✓</span>Готовность к публичной защите проекта</div>
+    </div>
+
+    <div class="result-final">
+      <div class="no">Не сертификат.</div>
+      <div class="no">Не диплом.</div>
+      <div style="font-size:14px;color:var(--text-3);">Главный результат —</div>
+      <div class="yes">допуск к Elevator Pitch</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ELEVATOR PITCH ── -->
+<section class="section pitch-section">
+  <div class="section-inner">
+    <div class="section-label">Что такое Elevator Pitch</div>
+    <h2 class="section-title">Публичное инвестиционное шоу</h2>
+
+    <div class="role-grid">
+      <div class="role-card"><div class="role-icon">⚖️</div><div class="role-name">Судья</div><div class="role-desc">Ведёт процесс</div></div>
+      <div class="role-card"><div class="role-icon">🎙️</div><div class="role-name">Прокурор</div><div class="role-desc">Ищет слабые места</div></div>
+      <div class="role-card"><div class="role-icon">🛡️</div><div class="role-name">Адвокат</div><div class="role-desc">Защищает проект</div></div>
+      <div class="role-card"><div class="role-icon">💼</div><div class="role-name">Инвестком</div><div class="role-desc">Инвестиционный комитет фонда</div></div>
+    </div>
+
+    <p class="pitch-line">После обсуждения принимается <strong>реальное инвестиционное решение</strong>. Именно к этому событию готовится каждый участник Elevator.</p>
+  </div>
+</section>
+
+<!-- ── КАК ПРОХОДИТ ПРОГРАММА ── -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-label">Как проходит программа</div>
+    <h2 class="section-title">Путь от заявки до инвестиционного решения</h2>
+
+    <div class="stepper">
+      <div class="step"><div class="step-marker"><div class="step-dot">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Подача заявки</div><div class="step-desc">MVP, демо, GitHub, видео</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Отбор</div><div class="step-desc">Оценка проекта и команды</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">3</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Старт батча</div><div class="step-desc">Начало программы</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">4</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Работа с менторами</div><div class="step-desc">Еженедельные спринты</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">5</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Первые пользователи</div><div class="step-desc">Customer Development</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">6</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Первая выручка</div><div class="step-desc">Продажи и Unit Economics</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">7</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Репетиция Pitch</div><div class="step-desc">Mock Pitch с менторами</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">8</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Elevator Pitch</div><div class="step-desc">Публичная защита проекта</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">9</div></div><div class="step-body"><div class="step-title">Инвестиционное решение</div><div class="step-desc">Финал пути</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ПРИНЦИПЫ ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Основные принципы программы</div>
+    <p class="big-statement">Не лекции. Не теория. <span class="muted">Максимум практики.</span></p>
+
+    <div class="principle-row">
+      <div class="principle-item"><b>Каждая неделя заканчивается конкретным результатом</b>, а не просмотренным видео.</div>
+    </div>
+
+    <div class="example-grid">
+      <div class="example-tag">Провести интервью</div>
+      <div class="example-tag">Привлечь пользователей</div>
+      <div class="example-tag">Сделать первые продажи</div>
+      <div class="example-tag">Обновить финансовую модель</div>
+      <div class="example-tag">Провести репетицию питча</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── МЕНТОРЫ ── -->
+<section class="section" id="mentors">
+  <div class="section-inner">
+    <div class="section-label">Менторы</div>
+    <h2 class="section-title">Действующие предприниматели и инвесторы</h2>
+    <p class="section-desc">Не преподаватели. Люди, которые сами прошли путь от MVP до выручки и инвестиций — и сопровождают команды лично.</p>
+
+    <div class="mentor-grid">
+      <div class="mentor-card"><div class="mentor-avatar">АК</div><div class="mentor-name">Артём Ковалёв</div><div class="mentor-role">Основатель, 2 экзита</div><div class="mentor-desc">Growth и продажи B2B SaaS</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">МЛ</div><div class="mentor-name">Мария Литвинова</div><div class="mentor-role">Управляющий партнёр фонда</div><div class="mentor-desc">Инвестиционная упаковка и питчинг</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">ДС</div><div class="mentor-name">Даниил Соколов</div><div class="mentor-role">Серийный предприниматель</div><div class="mentor-desc">Product Market Fit, Customer Dev</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">ЕВ</div><div class="mentor-name">Елена Воронцова</div><div class="mentor-role">CFO нескольких стартапов</div><div class="mentor-desc">Unit Economics и финмодели</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">ИП</div><div class="mentor-name">Игорь Петров</div><div class="mentor-role">Head of Growth</div><div class="mentor-desc">Первые продажи и каналы роста</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">НТ</div><div class="mentor-name">Наталья Титова</div><div class="mentor-role">Инвестиционный аналитик</div><div class="mentor-desc">Due diligence и метрики</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BATCH #1 ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Ближайший набор</div>
+    <div class="batch-card">
+      <div class="batch-head">
+        <div class="batch-num">Batch #1</div>
+        <div class="batch-tag">Набор открыт</div>
+      </div>
+      <div class="batch-dates">
+        <div>
+          <div class="batch-date-label">Старт программы</div>
+          <div class="batch-date-value">Сентябрь 2026</div>
+        </div>
+        <div>
+          <div class="batch-date-label">Приём заявок заканчивается</div>
+          <div class="batch-date-value warn">1 сентября 2026</div>
+        </div>
+        <div>
+          <div class="batch-date-label">Следующий набор</div>
+          <div class="batch-date-value">Декабрь 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:8px;">Частые вопросы</h2>
+
+    <div style="margin-top:32px;">
+      <div class="faq-item open">
+        <div class="faq-q">Подходит ли программа, если есть только идея?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет. Нужно иметь работающий MVP.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Нужно ли юридическое лицо?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Можно ли участвовать одному?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Да, если продукт уже существует.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Можно ли попасть сразу на Elevator Pitch?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет. Сначала необходимо пройти программу Elevator.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLY FORM ── -->
+<section class="section" id="apply">
+  <div class="section-inner">
+    <div class="section-label">Заявка</div>
+    <h2 class="section-title">Подать заявку в Batch #1</h2>
+    <p class="section-desc">Приём заявок закрывается 1 сентября 2026. Ответ приходит после отбора.</p>
+
+    <div class="apply-card">
+      <div class="form-row">
+        <div class="form-field"><label>Название проекта</label><input type="text" placeholder="Название вашего стартапа"></div>
+        <div class="form-field"><label>Имя и роль</label><input type="text" placeholder="Иван Иванов, Founder"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Email</label><input type="email" placeholder="you@startup.com"></div>
+        <div class="form-field"><label>Ссылка на MVP</label><input type="url" placeholder="https://"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>GitHub (если применимо)</label><input type="url" placeholder="https://github.com/..."></div>
+        <div class="form-field"><label>Видео демонстрация</label><input type="url" placeholder="Ссылка на демо-видео"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full"><label>Коротко о продукте и первых пользователях</label><textarea placeholder="Что делает продукт, кто уже им пользуется..."></textarea></div>
+      </div>
+      <a href="#" class="btn btn-primary btn-hero" style="width:100%;margin-top:8px;">Отправить заявку →</a>
+      <p class="form-hint">Без ссылки на работающий MVP заявка <b>не рассматривается</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="section screens-section" id="product">
+  <div class="section-inner">
+    <div class="section-label">Платформа Elevator</div>
+    <h2 class="section-title">10 экранов продукта</h2>
+    <p class="section-desc">Внутренняя платформа, в которой команда живёт всю программу — от старта батча до допуска на Elevator Pitch.</p>
+
+    <div class="screens-eyebrow-row">Прогресс и работа команды</div>
+    <div class="screens-grid" style="margin-bottom:8px;">
+      <a href="dashboard.html" class="screen-card">
+        <div class="screen-preview" style="background:#191410;">🚀</div>
+        <div class="screen-info"><div class="screen-name">Dashboard участника</div><div class="screen-desc">Прогресс и задачи недели</div></div>
+      </a>
+      <a href="progress-map.html" class="screen-card">
+        <div class="screen-preview" style="background:#101915;">🗺️</div>
+        <div class="screen-info"><div class="screen-name">Карта прогресса</div><div class="screen-desc">Путь от MVP до Pitch Ready</div></div>
+      </a>
+      <a href="roadmap.html" class="screen-card">
+        <div class="screen-preview" style="background:#141019;">🧭</div>
+        <div class="screen-info"><div class="screen-name">Roadmap программы</div><div class="screen-desc">12 недель батча</div></div>
+      </a>
+      <a href="sprint.html" class="screen-card">
+        <div class="screen-preview" style="background:#191410;">📋</div>
+        <div class="screen-info"><div class="screen-name">Еженедельный Sprint</div><div class="screen-desc">Kanban текущей недели</div></div>
+      </a>
+      <a href="weekly-task.html" class="screen-card">
+        <div class="screen-preview" style="background:#101915;">🎯</div>
+        <div class="screen-info"><div class="screen-name">Задание недели</div><div class="screen-desc">Детали и сдача результата</div></div>
+      </a>
+      <a href="calendar.html" class="screen-card">
+        <div class="screen-preview" style="background:#141019;">📅</div>
+        <div class="screen-info"><div class="screen-name">Календарь</div><div class="screen-desc">Звонки, дедлайны, Pitch Day</div></div>
+      </a>
+    </div>
+
+    <div class="screens-eyebrow-row">Менторство и подготовка к сцене</div>
+    <div class="screens-grid">
+      <a href="mentor-cabinet.html" class="screen-card">
+        <div class="screen-preview" style="background:#191410;">🧑‍🏫</div>
+        <div class="screen-info"><div class="screen-name">Кабинет ментора</div><div class="screen-desc">Команды и обратная связь</div></div>
+      </a>
+      <a href="mock-pitch.html" class="screen-card">
+        <div class="screen-preview" style="background:#101915;">🎤</div>
+        <div class="screen-info"><div class="screen-name">Mock Pitch</div><div class="screen-desc">Репетиция перед сценой</div></div>
+      </a>
+      <a href="pitch-ready.html" class="screen-card">
+        <div class="screen-preview" style="background:#141019;">🏆</div>
+        <div class="screen-info"><div class="screen-name">Pitch Ready</div><div class="screen-desc">Допуск подтверждён</div></div>
+      </a>
+      <a href="pitch-application.html" class="screen-card">
+        <div class="screen-preview" style="background:#191410;">📮</div>
+        <div class="screen-info"><div class="screen-name">Заявка на Elevator Pitch</div><div class="screen-desc">Финальный шаг перед сценой</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BOTTOM ── -->
+<div class="cta-bottom">
+  <div class="cta-bottom-title">Batch #1 закрывается<br>1 сентября 2026</div>
+  <p class="cta-bottom-desc">Следующий набор — только в декабре. Если MVP готов, не откладывайте заявку.</p>
+  <a href="#apply" class="btn btn-primary btn-hero">Подать заявку →</a>
+</div>
+
+<footer class="footer">
+  <a href="#" class="footer-logo"><span class="dot"></span>Elevator</a>
+  <div class="footer-note">Часть экосистемы Brainbox · Sandbox → Elevator → Elevator Pitch → brainbox_I</div>
+</footer>
+
+<script>
+  // countdown
+  var deadline = new Date('2026-09-01T00:00:00');
+  function tick(){
+    var now = new Date();
+    var diff = Math.max(0, deadline - now);
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // faq accordion
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

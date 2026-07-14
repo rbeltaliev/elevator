@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверка задания — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-badge.curator{color:var(--text-2);background:var(--border-light);border:1px solid var(--border);margin-left:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .r-header{margin-bottom:28px;}
+  .r-eyebrow{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+  .r-h1{font-size:26px;font-weight:700;margin-bottom:6px;}
+  .r-sub{font-size:14px;color:var(--text-3);}
+
+  .queue{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;}
+  .queue-row{display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;cursor:pointer;transition:box-shadow .15s;}
+  .queue-row:hover{box-shadow:var(--shadow);}
+  .queue-row.active{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 1px var(--accent);}
+  .queue-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:13px;flex-shrink:0;}
+  .queue-info{flex:1;}
+  .queue-name{font-size:14px;font-weight:600;}
+  .queue-meta{font-size:12.5px;color:var(--text-3);margin-top:2px;}
+  .queue-date{font-size:12px;color:var(--text-3);flex-shrink:0;}
+  .queue-status{font-size:11px;font-weight:700;color:var(--gold);background:var(--gold-light);border-radius:var(--radius-pill);padding:4px 10px;flex-shrink:0;}
+
+  .submission-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px;margin-bottom:24px;}
+  .sub-top{display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+  .sub-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:16px;flex-shrink:0;}
+  .sub-name{font-size:17px;font-weight:700;}
+  .sub-meta{font-size:13px;color:var(--text-3);}
+
+  .history-strip{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 4px;padding:16px 18px;background:var(--bg);border-radius:var(--radius);}
+  .history-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-2);background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 12px;}
+  .history-item .check{color:var(--success);font-weight:700;}
+  .history-item.current{border-color:var(--accent-muted);color:var(--accent);font-weight:600;background:var(--accent-light);}
+
+  .qa-block{margin-top:26px;}
+  .qa-q{font-size:13px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+  .qa-a{font-size:14.5px;color:var(--text);line-height:1.65;background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:20px;}
+  .qa-a.choice{font-weight:500;}
+  .qa-a.choice .tick{color:var(--success);margin-right:6px;}
+
+  .feedback-block{margin-top:8px;}
+  .feedback-label{font-size:14px;font-weight:600;margin-bottom:10px;}
+  textarea{width:100%;font-family:'Onest',sans-serif;font-size:14px;color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;resize:vertical;min-height:90px;background:var(--bg);outline:none;line-height:1.55;}
+  textarea:focus{border-color:var(--accent);background:var(--white);}
+
+  .action-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center;}
+  .btn-lg{font-size:15px;padding:13px 26px;border-radius:var(--radius-pill);}
+  .unlock-note{font-size:12.5px;color:var(--text-3);}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <div class="topbar-badge curator">Режим куратора</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link active">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+
+<div class="app-content">
+  <div class="r-header">
+    <div class="r-eyebrow">Очередь на проверку</div>
+    <h1 class="r-h1">Проверка домашних заданий</h1>
+    <div class="r-sub">4 работы ожидают решения куратора</div>
+  </div>
+
+  <div class="queue">
+    <div class="queue-row active">
+      <div class="queue-avatar">ИИ</div>
+      <div class="queue-info"><div class="queue-name">Nova Metrics · Илья Ильин</div><div class="queue-meta">Уровень 1 · Ценность</div></div>
+      <div class="queue-date">сегодня, 09:14</div>
+      <div class="queue-status">на проверке</div>
+    </div>
+    <div class="queue-row">
+      <div class="queue-avatar">СВ</div>
+      <div class="queue-info"><div class="queue-name">Fleet OS · Софья Волкова</div><div class="queue-meta">Уровень 5 · Маркетинг</div></div>
+      <div class="queue-date">вчера, 21:40</div>
+      <div class="queue-status">на проверке</div>
+    </div>
+    <div class="queue-row">
+      <div class="queue-avatar">АМ</div>
+      <div class="queue-info"><div class="queue-name">Legalist AI · Артур Мамедов</div><div class="queue-meta">Уровень 3 · Команда</div></div>
+      <div class="queue-date">вчера, 18:02</div>
+      <div class="queue-status">на проверке</div>
+    </div>
+    <div class="queue-row">
+      <div class="queue-avatar">ТК</div>
+      <div class="queue-info"><div class="queue-name">Каспарова Textile · Тамара Каспарова</div><div class="queue-meta">Уровень 5 · Маркетинг</div></div>
+      <div class="queue-date">2 дня назад</div>
+      <div class="queue-status">на проверке</div>
+    </div>
+  </div>
+
+  <div class="submission-card">
+    <div class="sub-top">
+      <div class="sub-avatar">ИИ</div>
+      <div>
+        <div class="sub-name">Илья Ильин · Nova Metrics</div>
+        <div class="sub-meta">Уровень 1 · Ценность · отправлено сегодня в 09:14</div>
+      </div>
+    </div>
+
+    <div class="history-strip">
+      <div class="history-item current">Уровень 1 · Ценность · на проверке</div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Почему сейчас подходящее время для AI-стартапа?</div>
+      <div class="qa-a choice"><span class="tick">✓</span>Стоимость разработки MVP упала настолько, что один человек может проверить гипотезу без команды и бюджета на найм</div>
+
+      <div class="qa-q">Опишите вашу гипотезу в одном предложении</div>
+      <div class="qa-a">Если дать B2B-командам e-commerce AI-инструмент, который автоматически объясняет, почему просела конверсия или вырос отток, они смогут принимать решения за часы, а не за недели ожидания аналитика.</div>
+
+      <div class="qa-q">Опишите ценность вашего продукта.</div>
+      <div class="qa-a">Nova Metrics превращает сырую аналитику магазина в готовые объяснения на человеческом языке: не просто «конверсия упала на 12%», а «конверсия упала из-за роста времени доставки в категории электроники». Команда экономит недели ручного анализа и реагирует на проблему в тот же день.</div>
+
+      <div class="qa-q">Почему пользователь должен выбрать именно вас?</div>
+      <div class="qa-a">Мы не показываем дашборд с графиками, которые ещё нужно интерпретировать — мы сразу даём вывод и рекомендацию к действию. Для команды из 3–5 человек в e-commerce это разница между «нанять аналитика» и «просто открыть Nova Metrics по утрам».</div>
+    </div>
+
+    <div class="feedback-block">
+      <div class="feedback-label">Комментарий участнику</div>
+      <textarea placeholder="Оставьте обратную связь по работе...">Илья, гипотеза сформулирована чётко, а ответ про ценность звучит убедительно и конкретно — видно, что вы понимаете, за что именно платит клиент. На следующем уровне стоит проверить эту гипотезу на 3–5 реальных владельцах e-commerce-магазинов, прежде чем двигаться в продукт.</textarea>
+    </div>
+
+    <div class="action-row">
+      <a href="#" class="btn btn-primary btn-lg">Принять → откроет уровень 2</a>
+      <a href="#" class="btn btn-ghost btn-lg">Вернуть на доработку</a>
+      <span class="unlock-note">Принятие работы автоматически откроет участнику уровень 2 «Методология»</span>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

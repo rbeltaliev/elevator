@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лента — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+  ::selection{background:var(--accent);color:#fff;}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .feed-layout{max-width:1040px;margin:0 auto;padding:28px 24px 80px;display:grid;grid-template-columns:1fr 280px;gap:32px;}
+  @media(max-width:900px){.feed-layout{grid-template-columns:1fr;}}
+
+  .composer{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:24px;display:flex;align-items:center;gap:14px;}
+  .composer-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:13px;flex-shrink:0;}
+  .composer-input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-pill);padding:12px 18px;font-size:14px;color:var(--text-3);cursor:not-allowed;}
+  .composer-btn{flex-shrink:0;font-size:13.5px;padding:11px 20px;border-radius:var(--radius-pill);opacity:.5;cursor:not-allowed;}
+
+  .post{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px;}
+  .post-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .post-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:14px;flex-shrink:0;}
+  .post-meta{flex:1;min-width:0;}
+  .post-name-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .post-name{font-size:14.5px;font-weight:600;}
+  .post-startup{font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-light);border-radius:var(--radius-pill);padding:2px 10px;}
+  .post-time{font-size:12.5px;color:var(--text-3);margin-top:2px;}
+  .post-body{font-size:14.5px;line-height:1.6;color:var(--text);margin-bottom:14px;}
+  .post-reactions{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--text-3);}
+  .reaction{background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-pill);padding:5px 12px;font-size:13px;color:var(--text-2);}
+  .comment-count{margin-left:auto;font-weight:500;}
+  .mentor-reply{margin-top:14px;background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;}
+  .mentor-reply-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .mentor-reply-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:10.5px;}
+  .mentor-reply-name{font-size:13px;font-weight:600;}
+  .mentor-badge{font-size:10px;font-weight:700;color:var(--accent);background:var(--white);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:2px 8px;text-transform:uppercase;letter-spacing:.03em;}
+  .mentor-reply-text{font-size:13.5px;color:var(--text-2);line-height:1.55;}
+
+  .side-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow);margin-bottom:16px;}
+  .side-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em;}
+  .event-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-light);}
+  .event-item:last-child{border-bottom:none;padding-bottom:0;}
+  .event-date{flex-shrink:0;width:42px;height:42px;border-radius:var(--radius);background:var(--accent-light);color:var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;line-height:1.1;}
+  .event-date b{font-size:15px;}
+  .event-date span{font-size:9px;text-transform:uppercase;}
+  .event-info h4{font-size:13.5px;font-weight:600;margin-bottom:2px;}
+  .event-info p{font-size:12px;color:var(--text-3);}
+  .stat-row{display:flex;align-items:center;gap:10px;padding:9px 0;}
+  .stat-icon{font-size:18px;}
+  .stat-text{font-size:13px;color:var(--text-2);}
+  .stat-text b{color:var(--text);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link active">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+
+<div class="feed-layout">
+  <div>
+    <div class="composer">
+      <div class="composer-avatar">ИИ</div>
+      <div class="composer-input">Что произошло с твоим проектом сегодня?</div>
+      <div class="btn btn-primary composer-btn">Опубликовать</div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">ИИ</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Илья Ильин</span><span class="post-startup">Nova Metrics</span></div>
+          <div class="post-time">Сегодня, 11:24</div>
+        </div>
+      </div>
+      <div class="post-body">Сегодня протестировал рекламу в Telegram Ads. Получил 37 регистраций. Стоимость лида — 126 ₽. Дешевле, чем ожидал — масштабирую бюджет на следующей неделе.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 12</div>
+        <div class="reaction">💡 4</div>
+        <div class="reaction">👏 7</div>
+        <div class="comment-count">💬 5 комментариев</div>
+      </div>
+      <div class="mentor-reply">
+        <div class="mentor-reply-head">
+          <div class="mentor-reply-avatar">ИП</div>
+          <div class="mentor-reply-name">Игорь Петров</div>
+          <div class="mentor-badge">Ментор</div>
+        </div>
+        <div class="mentor-reply-text">126 ₽ за лид в B2B — отличный старт. Проверь, сколько из этих 37 доходят до демо-звонка, это следующая точка отвала.</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">СК</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Соня Крылова</span><span class="post-startup">Foodly</span></div>
+          <div class="post-time">Сегодня, 09:47</div>
+        </div>
+      </div>
+      <div class="post-body">Поменял оффер с "подбор рецептов" на "экономь на продуктах". Получил первую продажу — 990 ₽ за подписку. Мелочь, но это первые реальные деньги от незнакомого человека.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 24</div>
+        <div class="reaction">💡 6</div>
+        <div class="reaction">👏 19</div>
+        <div class="comment-count">💬 11 комментариев</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">МД</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Максим Дорохов</span><span class="post-startup">Legalyst</span></div>
+          <div class="post-time">Вчера, 20:12</div>
+        </div>
+      </div>
+      <div class="post-body">Нашёл кофаундера — теперь нас двое. Знакомая по прошлой работе, юрист, закрывает всю экспертизу, в которой я плавал. Уровень 3 наконец-то сдвинулся с места.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 31</div>
+        <div class="reaction">💡 2</div>
+        <div class="reaction">👏 28</div>
+        <div class="comment-count">💬 14 комментариев</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">ВГ</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Вера Голикова</span><span class="post-startup">Petly</span></div>
+          <div class="post-time">Вчера, 17:03</div>
+        </div>
+      </div>
+      <div class="post-body">Провёл 5 кастдев-звонков с владельцами кошек. Гипотеза "нужен трекер здоровья питомца" не подтвердилась — всех больше волнует напоминание о прививках. Меняю позиционирование под это.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 9</div>
+        <div class="reaction">💡 15</div>
+        <div class="reaction">👏 6</div>
+        <div class="comment-count">💬 8 комментариев</div>
+      </div>
+      <div class="mentor-reply">
+        <div class="mentor-reply-head">
+          <div class="mentor-reply-avatar">ДС</div>
+          <div class="mentor-reply-name">Даниил Соколов</div>
+          <div class="mentor-badge">Ментор</div>
+        </div>
+        <div class="mentor-reply-text">Это отличный кастдев — ты не подгонял ответы под гипотезу, а услышал реальную боль. Смени и название фичи в лендинге, не только позиционирование в голове.</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">РА</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Роман Авдеев</span><span class="post-startup">Shelfie</span></div>
+          <div class="post-time">2 дня назад</div>
+        </div>
+      </div>
+      <div class="post-body">Первые 100 000 ₽ выручки за месяц 🎉 Три клиента на подписке по 33 000 ₽, все нашли нас через контент в Telegram-канале. Ноль платной рекламы.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 47</div>
+        <div class="reaction">💡 8</div>
+        <div class="reaction">👏 39</div>
+        <div class="comment-count">💬 22 комментария</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">ДТ</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Дарья Титаренко</span><span class="post-startup">Wearsy</span></div>
+          <div class="post-time">2 дня назад</div>
+        </div>
+      </div>
+      <div class="post-body">Запустил лендинг на Vibe Coding за один вечер. Раньше на это уходила неделя с фрилансером. Уже собрал 60 email на вейтлист.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 18</div>
+        <div class="reaction">💡 21</div>
+        <div class="reaction">👏 10</div>
+        <div class="comment-count">💬 9 комментариев</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar">ПН</div>
+        <div class="post-meta">
+          <div class="post-name-row"><span class="post-name">Павел Нестеров</span><span class="post-startup">Rentiq</span></div>
+          <div class="post-time">3 дня назад</div>
+        </div>
+      </div>
+      <div class="post-body">Неделя без прогресса — застрял на выборе между двумя сегментами аудитории. Решил не гадать и запустить два лендинга параллельно, посмотрим, куда пойдёт трафик охотнее.</div>
+      <div class="post-reactions">
+        <div class="reaction">🔥 6</div>
+        <div class="reaction">💡 13</div>
+        <div class="reaction">👏 4</div>
+        <div class="comment-count">💬 7 комментариев</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="side-card">
+      <div class="side-title">Ближайшие события</div>
+      <div class="event-item">
+        <div class="event-date"><b>28</b><span>авг</span></div>
+        <div class="event-info"><h4>Demo Day · Batch #1</h4><p>Финал восьми недель, инвестиционные решения</p></div>
+      </div>
+      <div class="event-item">
+        <div class="event-date"><b>17</b><span>июл</span></div>
+        <div class="event-info"><h4>Office Hours: Мария Литвинова</h4><p>Разбор питч-дека, 18:00 МСК</p></div>
+      </div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">Сейчас в кампусе</div>
+      <div class="stat-row"><div class="stat-icon">🟢</div><div class="stat-text"><b>34</b> участника онлайн сегодня</div></div>
+      <div class="stat-row"><div class="stat-icon">🧪</div><div class="stat-text"><b>12</b> экспериментов на этой неделе</div></div>
+      <div class="stat-row"><div class="stat-icon">💬</div><div class="stat-text"><b>58</b> комментариев за 24 часа</div></div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

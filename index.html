@@ -3,643 +3,405 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elevator — Batch #1 · Приём заявок открыт</title>
+<title>Elevator Pitch — 3 минуты, которые могут изменить твою жизнь</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
-    --bg:#0a0a0c;
-    --bg-elevated:#111114;
-    --bg-card:#141417;
-    --bg-card-hover:#1a1a1f;
-    --border:#242428;
-    --border-light:#1c1c20;
-    --text:#f6f5f3;
-    --text-2:#a3a3ab;
-    --text-3:#68686f;
-    --accent:#ff5a1f;
-    --accent-hover:#ff7038;
-    --accent-light:rgba(255,90,31,.12);
-    --accent-muted:rgba(255,90,31,.35);
-    --success:#33d17a;
-    --success-light:rgba(51,209,122,.1);
-    --gold:#e0b04b;
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
     --radius:10px;
-    --radius-lg:20px;
+    --radius-lg:16px;
     --radius-pill:100px;
-    --shadow-md:0 12px 40px rgba(0,0,0,.5);
-    --shadow-lg:0 30px 90px rgba(0,0,0,.6);
   }
   html{font-size:16px;scroll-behavior:smooth;}
-  body{
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    background-image:radial-gradient(circle at 50% -10%, rgba(255,90,31,.10), transparent 45%);
-  }
-  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
   a{color:inherit;}
   .container{max-width:1120px;margin:0 auto;padding:0 24px;}
 
   /* ── NAV ── */
-  .nav{
-    position:fixed;top:0;left:0;right:0;z-index:200;height:64px;
-    background:rgba(10,10,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border-light);
-    display:flex;align-items:center;padding:0 24px;
-  }
+  .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(244,242,238,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;}
   .nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px;}
-  .nav-logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;text-decoration:none;color:var(--text);flex-shrink:0;}
-  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+  .nav-logo{font-family:'Geologica',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.03em;text-decoration:none;color:var(--text);flex-shrink:0;}
+  .nav-logo span{color:var(--accent);}
   .nav-spacer{flex:1;}
   .nav-links{display:none;align-items:center;gap:2px;}
   .nav-link{font-size:14px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 14px;border-radius:var(--radius-pill);transition:background .15s,color .15s;}
-  .nav-link:hover{background:var(--bg-card);color:var(--text);}
-  .btn{font-family:'Inter',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .nav-link:hover{background:var(--white);color:var(--text);}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
   .btn:active{transform:scale(.97);}
   .btn-nav{font-size:14px;padding:9px 18px;border-radius:var(--radius-pill);}
-  .btn-primary{background:var(--accent);color:#0a0a0c;}
-  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 6px 24px rgba(255,90,31,.35);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
   .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
-  .btn-ghost:hover{background:var(--bg-card);color:var(--text);}
-  @media(min-width:860px){.nav-links{display:flex;}}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+  .btn-dark{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.16);}
+  .btn-dark:hover{background:rgba(255,255,255,.14);}
+  @media(min-width:900px){.nav-links{display:flex;}}
 
   /* ── HERO ── */
-  .hero{padding:168px 24px 90px;text-align:center;max-width:900px;margin:0 auto;position:relative;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);
-    background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);
-    padding:6px 16px 6px 12px;margin-bottom:32px;letter-spacing:.01em;
-  }
-  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);position:relative;}
-  .eyebrow .pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--accent);animation:pulse 1.8s ease-out infinite;}
-  @keyframes pulse{0%{transform:scale(.6);opacity:1;}100%{transform:scale(1.9);opacity:0;}}
-  .hero-title{font-size:clamp(48px,9vw,88px);font-weight:700;line-height:.98;margin-bottom:6px;}
-  .hero-title span{color:var(--accent);}
-  .hero-batch{font-size:clamp(18px,3vw,22px);font-weight:600;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:44px;}
+  .hero-wrap{padding:120px 16px 0;}
+  .hero-top{max-width:760px;margin:0 auto;text-align:center;padding:0 16px 44px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:6px 16px;margin-bottom:28px;}
+  .hero-title{font-size:clamp(34px,6vw,64px);font-weight:700;line-height:1.05;margin-bottom:20px;}
+  .hero-title .num{color:var(--accent);}
+  .hero-sub{font-size:18px;line-height:1.6;color:var(--text-2);max-width:620px;margin:0 auto 36px;}
+  .hero-sub b{color:var(--text);font-weight:600;}
+  .hero-ctas{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+  .btn-lg{font-size:16px;padding:15px 32px;border-radius:var(--radius-pill);}
 
-  .countdown{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:40px;}
-  .countdown-label{font-size:13px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;}
-  .countdown-grid{display:flex;gap:10px;}
-  .countdown-box{
-    background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
-    width:76px;padding:14px 0 10px;text-align:center;
-  }
-  .countdown-num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text);}
-  .countdown-unit{font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
-  .countdown-date{font-size:13px;color:var(--text-3);margin-top:4px;}
-
-  .hero-cta{margin-bottom:36px;}
-  .btn-hero{font-size:16px;padding:15px 34px;border-radius:var(--radius-pill);}
-  .hero-desc{font-size:17px;line-height:1.6;color:var(--text-2);max-width:560px;margin:0 auto;}
-
-  /* ── ECOSYSTEM STRIP ── */
-  .ecosystem{padding:0 24px 100px;}
-  .ecosystem-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
-  .eco-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 18px;text-align:center;}
-  .eco-dot{width:10px;height:10px;border-radius:50%;background:var(--border);}
-  .eco-step.active .eco-dot{background:var(--accent);box-shadow:0 0 14px var(--accent);}
-  .eco-name{font-size:13px;font-weight:600;color:var(--text-3);}
-  .eco-step.active .eco-name{color:var(--text);}
-  .eco-sub{font-size:11px;color:var(--text-3);}
-  .eco-arrow{color:var(--border);font-size:16px;padding:0 4px 20px;}
+  .stage{max-width:1120px;margin:0 auto;background:radial-gradient(circle at 50% 120%,rgba(24,71,227,.35),transparent 60%),linear-gradient(180deg,#0b0d16,#05060a);border-radius:24px 24px 0 0;padding:56px 24px 0;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);}
+  .stage::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(24,71,227,.28),transparent 65%);pointer-events:none;}
+  .stage-live{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:600;color:#ff5d5d;letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px;position:relative;}
+  .stage-live .rec{width:7px;height:7px;border-radius:50%;background:#ff3b3b;animation:blink 1.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+  .stage-clock{font-family:'Geologica',sans-serif;font-size:clamp(72px,16vw,160px);font-weight:700;color:#fff;text-align:center;line-height:1;letter-spacing:-.02em;text-shadow:0 0 60px rgba(24,71,227,.6);position:relative;}
+  .stage-caption{text-align:center;color:rgba(255,255,255,.55);font-size:14px;margin-top:12px;position:relative;}
+  .stage-floor{margin-top:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);position:relative;}
+  .stage-committee{display:flex;justify-content:center;gap:14px;padding:26px 0 40px;position:relative;}
+  .committee-dot{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.18),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);}
+  .committee-dot:nth-child(3){width:40px;height:40px;background:radial-gradient(circle at 35% 30%,rgba(24,71,227,.5),rgba(255,255,255,.04));}
 
   /* ── SECTION ── */
-  .section{padding:96px 24px;border-top:1px solid var(--border-light);}
-  .section-inner{max-width:920px;margin:0 auto;}
-  .section-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;}
-  .section-title{font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:16px;line-height:1.15;}
-  .section-desc{font-size:17px;color:var(--text-2);line-height:1.6;max-width:640px;margin-bottom:48px;}
-  .center{text-align:center;margin-left:auto;margin-right:auto;}
+  .section{padding:96px 24px;}
+  .section-inner{max-width:960px;margin:0 auto;}
+  .section-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+  .section-title{font-size:clamp(26px,4vw,38px);font-weight:700;margin-bottom:16px;line-height:1.18;}
+  .section-desc{font-size:17px;color:var(--text-2);line-height:1.65;max-width:640px;margin-bottom:48px;}
+  .divider{border-top:1px solid var(--border);}
 
-  /* ── WHO: not-list / requirements ── */
-  .not-list{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;}
-  .not-item{display:flex;align-items:center;gap:14px;font-size:17px;color:var(--text-3);}
-  .not-item .x{width:22px;height:22px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-3);}
-  .not-item span.strike{text-decoration:line-through;text-decoration-color:var(--border);}
+  /* how the show works */
+  .show-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .show-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 24px;box-shadow:var(--shadow);}
+  .show-num{font-family:'Geologica',sans-serif;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px;}
+  .show-card h3{font-size:17px;font-weight:600;margin-bottom:8px;}
+  .show-card p{font-size:14px;color:var(--text-3);line-height:1.55;}
 
-  .yes-card{
-    background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
-    padding:32px;margin-bottom:32px;
-  }
-  .yes-card-title{font-size:20px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:8px;color:var(--text);}
-  .yes-card-title .check{color:var(--success);}
-  .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px;}
-  .req-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-2);background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius);padding:12px 14px;}
-  .req-item .ico{color:var(--accent);font-size:14px;}
-  .hard-line{font-size:16px;font-weight:600;color:var(--text);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius);padding:16px 20px;display:inline-block;}
-
-  /* ── WHAT HAPPENS ── */
-  .big-statement{font-size:clamp(22px,3.2vw,30px);font-weight:600;font-family:'Space Grotesk',sans-serif;line-height:1.35;margin-bottom:48px;color:var(--text);}
-  .big-statement .muted{color:var(--text-3);}
-  .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border-light);border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;}
-  .work-item{background:var(--bg-card);padding:22px 20px;font-size:14.5px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:12px;transition:background .15s,color .15s;}
-  .work-item:hover{background:var(--bg-card-hover);color:var(--text);}
-  .work-item .n{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text-3);}
-  .note{font-size:15px;color:var(--text-3);font-style:normal;}
-
-  /* ── RESULT ── */
-  .result-grid{display:flex;flex-direction:column;gap:2px;margin-bottom:44px;}
-  .result-item{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);font-size:16px;font-weight:500;}
-  .result-item .check{width:26px;height:26px;border-radius:50%;background:var(--success-light);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-  .result-final{text-align:center;padding:44px 24px;background:linear-gradient(180deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--border);border-radius:var(--radius-lg);}
-  .result-final .no{font-size:15px;color:var(--text-3);text-decoration:line-through;margin-bottom:4px;}
-  .result-final .no + .no{margin-bottom:14px;}
-  .result-final .yes{font-size:26px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent);margin-top:8px;}
-
-  /* ── ELEVATOR PITCH ── */
-  .pitch-section{background:var(--bg-elevated);}
-  .role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:36px;}
-  .role-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 20px;text-align:center;}
-  .role-icon{font-size:26px;margin-bottom:12px;}
-  .role-name{font-size:15px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:4px;}
-  .role-desc{font-size:12.5px;color:var(--text-3);}
-  .pitch-line{font-size:18px;color:var(--text-2);line-height:1.6;max-width:640px;}
-  .pitch-line strong{color:var(--text);}
-
-  /* ── TIMELINE / HOW ── */
+  /* stepper */
   .stepper{display:flex;flex-direction:column;}
-  .step{display:flex;gap:20px;position:relative;padding-bottom:36px;}
+  .step{display:flex;gap:20px;position:relative;padding-bottom:32px;}
   .step:last-child{padding-bottom:0;}
   .step-marker{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
-  .step-dot{width:34px;height:34px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--text-2);}
-  .step:nth-last-child(2) .step-dot,.step:last-child .step-dot{background:var(--accent);border-color:var(--accent);color:#0a0a0c;}
+  .step-dot{width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-size:14px;font-weight:700;color:var(--text-2);}
+  .step.final .step-dot{background:var(--accent);border-color:var(--accent);color:#fff;}
   .step-line{width:1px;flex:1;background:var(--border);margin-top:6px;}
-  .step-body{padding-top:4px;}
-  .step-title{font-size:17px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:4px;}
+  .step-body{padding-top:5px;}
+  .step-title{font-size:17px;font-weight:600;margin-bottom:4px;}
   .step-desc{font-size:14px;color:var(--text-3);}
 
-  /* ── PRINCIPLES ── */
-  .principle-row{display:flex;flex-direction:column;gap:2px;margin-bottom:36px;}
-  .principle-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:16px 20px;font-size:15px;color:var(--text-2);}
-  .principle-item b{color:var(--text);}
-  .example-grid{display:flex;flex-wrap:wrap;gap:10px;}
-  .example-tag{font-size:13px;font-weight:500;color:var(--text-2);background:var(--bg-elevated);border:1px solid var(--border-light);border-radius:var(--radius-pill);padding:8px 16px;}
+  /* bootcamp levels */
+  .level-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .level-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;position:relative;transition:transform .15s,box-shadow .15s;}
+  .level-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+  .level-tag{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .level-tag b{color:var(--accent);}
+  .level-card h3{font-size:16.5px;font-weight:600;margin-bottom:6px;}
+  .level-card p{font-size:13px;color:var(--text-3);line-height:1.5;}
 
-  /* ── MENTORS ── */
-  .mentor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;}
-  .mentor-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:border-color .15s,transform .15s;}
-  .mentor-card:hover{border-color:var(--accent-muted);transform:translateY(-3px);}
-  .mentor-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a33a11);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0a0a0c;font-size:17px;margin-bottom:16px;}
-  .mentor-name{font-size:16px;font-weight:600;font-family:'Space Grotesk',sans-serif;margin-bottom:2px;}
+  /* statement blocks */
+  .statement{font-size:clamp(22px,3.4vw,30px);font-weight:600;line-height:1.4;font-family:'Geologica',sans-serif;margin-bottom:36px;}
+  .statement .muted{color:var(--text-3);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{font-size:13.5px;font-weight:500;color:var(--text-2);background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:9px 16px;}
+
+  /* investment decisions */
+  .decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .decision-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px;}
+  .decision-icon{font-size:26px;margin-bottom:16px;}
+  .decision-amount{font-size:19px;font-weight:700;font-family:'Geologica',sans-serif;margin-bottom:6px;}
+  .decision-amount.gold{color:var(--gold);}
+  .decision-amount.blue{color:var(--accent);}
+  .decision-desc{font-size:13.5px;color:var(--text-3);line-height:1.5;}
+
+  /* mentors */
+  .mentor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
+  .mentor-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:transform .15s,box-shadow .15s;}
+  .mentor-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+  .mentor-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:16px;margin-bottom:14px;}
+  .mentor-name{font-size:15.5px;font-weight:600;margin-bottom:2px;}
   .mentor-role{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:10px;}
-  .mentor-desc{font-size:13.5px;color:var(--text-3);line-height:1.5;}
+  .mentor-desc{font-size:13px;color:var(--text-3);line-height:1.5;}
 
-  /* ── BATCH BLOCK ── */
-  .batch-card{background:var(--bg-card);border:1px solid var(--accent-muted);border-radius:var(--radius-lg);padding:44px;position:relative;overflow:hidden;}
-  .batch-card::before{content:'';position:absolute;top:-40%;right:-20%;width:340px;height:340px;background:radial-gradient(circle,rgba(255,90,31,.18),transparent 70%);}
-  .batch-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px;position:relative;}
-  .batch-num{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;}
-  .batch-tag{font-size:12px;font-weight:700;color:#0a0a0c;background:var(--accent);border-radius:var(--radius-pill);padding:5px 14px;text-transform:uppercase;letter-spacing:.05em;}
-  .batch-dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;position:relative;}
-  .batch-date-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
-  .batch-date-value{font-size:19px;font-weight:600;font-family:'Space Grotesk',sans-serif;}
-  .batch-date-value.warn{color:var(--accent);}
-
-  /* ── FAQ ── */
-  .faq-item{border-bottom:1px solid var(--border-light);}
-  .faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 4px;cursor:pointer;font-size:16px;font-weight:600;font-family:'Space Grotesk',sans-serif;}
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 4px;cursor:pointer;font-size:16px;font-weight:600;}
   .faq-q .plus{font-size:20px;color:var(--text-3);transition:transform .2s;flex-shrink:0;margin-left:16px;}
   .faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--accent);}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-  .faq-item.open .faq-a{max-height:200px;}
+  .faq-item.open .faq-a{max-height:220px;}
   .faq-a-inner{padding:0 4px 22px;font-size:15px;color:var(--text-2);line-height:1.6;}
 
-  /* ── GALLERY / SCREENS ── */
-  .screens-section{background:var(--bg-elevated);}
+  /* gallery */
+  .screens-section{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .screens-eyebrow-row{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin:28px 0 12px;}
   .screens-eyebrow-row:first-of-type{margin-top:0;}
-  .screens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
-  .screen-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none;display:block;transition:transform .15s,border-color .15s;}
-  .screen-card:hover{transform:translateY(-4px);border-color:var(--accent-muted);}
-  .screen-preview{height:100px;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--bg-elevated);border-bottom:1px solid var(--border-light);}
-  .screen-info{padding:16px 18px;}
-  .screen-name{font-size:14.5px;font-weight:600;margin-bottom:3px;}
-  .screen-desc{font-size:12.5px;color:var(--text-3);}
+  .screens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+  .screen-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none;display:block;transition:transform .15s,box-shadow .15s;}
+  .screen-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+  .screen-preview{height:96px;display:flex;align-items:center;justify-content:center;font-size:28px;border-bottom:1px solid var(--border-light);}
+  .screen-info{padding:15px 17px;}
+  .screen-name{font-size:14px;font-weight:600;margin-bottom:3px;}
+  .screen-desc{font-size:12px;color:var(--text-3);}
 
-  /* ── CTA BOTTOM ── */
-  .cta-bottom{padding:110px 24px;text-align:center;}
-  .cta-bottom-title{font-size:clamp(28px,5vw,44px);font-weight:700;margin-bottom:16px;line-height:1.15;}
-  .cta-bottom-desc{font-size:17px;color:var(--text-2);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;}
+  /* CTA bottom */
+  .cta-bottom{padding:120px 24px;text-align:center;background:linear-gradient(180deg,#05060a,#0b0d16);color:#fff;}
+  .cta-bottom-title{font-size:clamp(28px,5vw,46px);font-weight:700;margin-bottom:18px;line-height:1.15;max-width:680px;margin-left:auto;margin-right:auto;}
+  .cta-bottom-desc{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;}
 
-  /* ── APPLY FORM ── */
-  .apply-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-  @media(max-width:640px){.form-row{grid-template-columns:1fr;}}
-  .form-field{display:flex;flex-direction:column;gap:8px;}
-  .form-field.full{grid-column:1/-1;}
-  .form-field label{font-size:13px;font-weight:600;color:var(--text-2);}
-  .form-field input,.form-field textarea{
-    background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);
-    padding:12px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;
-    transition:border-color .15s;
-  }
-  .form-field input:focus,.form-field textarea:focus{border-color:var(--accent-muted);}
-  .form-field textarea{resize:vertical;min-height:80px;}
-  .form-hint{font-size:12px;color:var(--text-3);margin-top:20px;}
-  .form-hint b{color:var(--text-2);}
+  /* footer */
+  .footer{padding:48px 24px;text-align:center;background:#05060a;color:rgba(255,255,255,.4);}
+  .footer-logo{font-family:'Geologica',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;margin-bottom:10px;display:inline-block;}
+  .footer-note{font-size:13px;}
 
-  /* ── FOOTER ── */
-  .footer{padding:56px 24px 40px;text-align:center;border-top:1px solid var(--border-light);}
-  .footer-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);margin-bottom:14px;}
-  .footer-logo .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
-  .footer-note{font-size:13px;color:var(--text-3);}
-
-  ::selection{background:var(--accent);color:#0a0a0c;}
+  ::selection{background:var(--accent);color:#fff;}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo"><span class="dot"></span>Elevator</a>
+    <a href="#" class="nav-logo">Elevator<span>.</span>Pitch</a>
     <div class="nav-spacer"></div>
     <div class="nav-links">
-      <a href="#who" class="nav-link">Кто участвует</a>
-      <a href="#program" class="nav-link">Программа</a>
-      <a href="#how" class="nav-link">Как проходит</a>
+      <a href="#show" class="nav-link">Шоу</a>
+      <a href="#bootcamp" class="nav-link">Bootcamp</a>
       <a href="#mentors" class="nav-link">Менторы</a>
       <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#product" class="nav-link">Платформа</a>
     </div>
     <a href="#apply" class="btn btn-nav btn-primary">Подать заявку</a>
   </div>
 </nav>
 
 <!-- ── HERO ── -->
-<section class="hero">
-  <div class="eyebrow"><span class="pulse"></span>Batch #1 · Приём заявок открыт</div>
-  <h1 class="hero-title">Elevator</h1>
-  <div class="hero-batch">Batch #1</div>
-
-  <div class="countdown">
-    <div class="countdown-label">До окончания приёма заявок</div>
-    <div class="countdown-grid" id="countdown">
-      <div class="countdown-box"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit">дней</div></div>
-      <div class="countdown-box"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-unit">часов</div></div>
-      <div class="countdown-box"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-unit">минут</div></div>
-      <div class="countdown-box"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">секунд</div></div>
+<div class="hero-wrap">
+  <div class="hero-top">
+    <div class="eyebrow">Elevator Pitch × Alfa Capital</div>
+    <h1 class="hero-title">3 минуты, <span class="num">которые могут изменить твою жизнь</span></h1>
+    <p class="hero-sub">Brainbox совместно с <b>Альфа-Капиталом</b> объявляют призовой фонд <b>500 000 000 ₽</b> для AI-стартапов. Лучшие команды выступят в шоу Elevator Pitch перед инвестиционным комитетом.</p>
+    <div class="hero-ctas">
+      <a href="#apply" class="btn btn-primary btn-lg">Подать заявку</a>
+      <a href="#trailer" class="btn btn-ghost btn-lg">▶ Посмотреть трейлер</a>
     </div>
-    <div class="countdown-date">1 сентября 2026</div>
   </div>
 
-  <div class="hero-cta">
-    <a href="#apply" class="btn btn-primary btn-hero">Подать заявку →</a>
-  </div>
-
-  <p class="hero-desc">Программа для IT-стартапов, которые уже создали MVP и хотят пройти путь от первых пользователей до первой выручки.</p>
-</section>
-
-<!-- ── ECOSYSTEM STRIP ── -->
-<div class="ecosystem">
-  <div class="ecosystem-inner">
-    <div class="eco-step">
-      <div class="eco-dot"></div>
-      <div class="eco-name">Sandbox</div>
-      <div class="eco-sub">Собери MVP</div>
+  <div class="stage">
+    <div class="stage-live"><span class="rec"></span>Elevator Pitch · Прямой эфир</div>
+    <div class="stage-clock">03:00</div>
+    <div class="stage-caption">Время на выступление. Инвестиционный комитет уже ждёт.</div>
+    <div class="stage-committee">
+      <div class="committee-dot"></div><div class="committee-dot"></div><div class="committee-dot"></div><div class="committee-dot"></div><div class="committee-dot"></div>
     </div>
-    <div class="eco-arrow">→</div>
-    <div class="eco-step active">
-      <div class="eco-dot"></div>
-      <div class="eco-name">Elevator</div>
-      <div class="eco-sub">Стань бизнесом</div>
-    </div>
-    <div class="eco-arrow">→</div>
-    <div class="eco-step">
-      <div class="eco-dot"></div>
-      <div class="eco-name">Elevator Pitch</div>
-      <div class="eco-sub">Публичная защита</div>
-    </div>
-    <div class="eco-arrow">→</div>
-    <div class="eco-step">
-      <div class="eco-dot"></div>
-      <div class="eco-name">brainbox_I</div>
-      <div class="eco-sub">Инвестиции</div>
-    </div>
+    <div class="stage-floor"></div>
   </div>
 </div>
 
-<!-- ── КТО МОЖЕТ УЧАСТВОВАТЬ ── -->
-<section class="section" id="who">
+<!-- ── КАК УСТРОЕНО ШОУ ── -->
+<section class="section" id="show">
   <div class="section-inner">
-    <div class="section-label">Кто может участвовать</div>
-    <h2 class="section-title">Программа не для идеи</h2>
-    <p class="section-desc">Elevator — это не старт бизнеса с нуля. Это разгон уже существующего продукта.</p>
-
-    <div class="not-list">
-      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для идеи</span></div>
-      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для презентации</span></div>
-      <div class="not-item"><span class="x">✕</span><span class="strike">Программа для студентов</span></div>
-    </div>
-
-    <div class="yes-card">
-      <div class="yes-card-title"><span class="check">✓</span> Подаваться могут только проекты с готовым MVP</div>
-      <p style="font-size:14.5px;color:var(--text-3);">Во время подачи заявки обязательно прикладывается:</p>
-      <div class="req-grid">
-        <div class="req-item"><span class="ico">●</span>Ссылка на работающий MVP</div>
-        <div class="req-item"><span class="ico">●</span>Демо продукта</div>
-        <div class="req-item"><span class="ico">●</span>GitHub (если применимо)</div>
-        <div class="req-item"><span class="ico">●</span>Видео демонстрация</div>
-      </div>
-    </div>
-
-    <div class="hard-line">Без MVP заявка не рассматривается.</div>
-  </div>
-</section>
-
-<!-- ── ЧТО ПРОИСХОДИТ В ПРОГРАММЕ ── -->
-<section class="section" id="program">
-  <div class="section-inner">
-    <div class="section-label">Что происходит в программе</div>
-    <p class="big-statement"><span class="muted">Мы не продаём обучение.</span><br>Мы устраняем причины, по которым инвестор пока говорит стартапу «нет».</p>
-
-    <div class="work-grid">
-      <div class="work-item"><span class="n">01</span>Поиск первых пользователей</div>
-      <div class="work-item"><span class="n">02</span>Customer Development</div>
-      <div class="work-item"><span class="n">03</span>Первые платящие клиенты</div>
-      <div class="work-item"><span class="n">04</span>Product Market Fit</div>
-      <div class="work-item"><span class="n">05</span>Первые регулярные продажи</div>
-      <div class="work-item"><span class="n">06</span>Unit Economics</div>
-      <div class="work-item"><span class="n">07</span>Финансовая модель</div>
-      <div class="work-item"><span class="n">08</span>Инвестиционная упаковка</div>
-      <div class="work-item"><span class="n">09</span>Подготовка к Elevator Pitch</div>
-    </div>
-    <p class="note">Каждая неделя программы посвящена устранению очередного ограничения роста.</p>
-  </div>
-</section>
-
-<!-- ── РЕЗУЛЬТАТ ── -->
-<section class="section" id="result">
-  <div class="section-inner">
-    <div class="section-label">Результат программы</div>
-    <h2 class="section-title">После окончания стартап получает</h2>
-
-    <div class="result-grid">
-      <div class="result-item"><span class="check">✓</span>Подтверждённый спрос</div>
-      <div class="result-item"><span class="check">✓</span>Первых пользователей</div>
-      <div class="result-item"><span class="check">✓</span>Первую выручку</div>
-      <div class="result-item"><span class="check">✓</span>Инвестиционную упаковку</div>
-      <div class="result-item"><span class="check">✓</span>Готовность к публичной защите проекта</div>
-    </div>
-
-    <div class="result-final">
-      <div class="no">Не сертификат.</div>
-      <div class="no">Не диплом.</div>
-      <div style="font-size:14px;color:var(--text-3);">Главный результат —</div>
-      <div class="yes">допуск к Elevator Pitch</div>
+    <div class="section-label">Как устроено шоу</div>
+    <h2 class="section-title">Реальные питчи. Реальные деньги. Реальное решение — вживую.</h2>
+    <p class="section-desc">Elevator Pitch — это не мотивационная конференция. Это формат, в котором инвестиционное решение принимается на сцене, при зрителях, за считаные минуты.</p>
+    <div class="show-grid">
+      <div class="show-card"><div class="show-num">01</div><h3>Выход на сцену</h3><p>Участник выходит один. Перед ним — инвестиционный комитет фонда Brainbox.</p></div>
+      <div class="show-card"><div class="show-num">02</div><h3>3 минуты питча</h3><p>Без слайдов на 40 минут. Только суть: продукт, метрики, команда, амбиции.</p></div>
+      <div class="show-card"><div class="show-num">03</div><h3>Вопросы комитета</h3><p>Жёсткие, точные вопросы от людей, которые реально управляют деньгами.</p></div>
+      <div class="show-card"><div class="show-num">04</div><h3>Решение вживую</h3><p>Инвестиция, менторство или отказ — комитет объявляет решение сразу, на сцене.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── ELEVATOR PITCH ── -->
-<section class="section pitch-section">
+<!-- ── ПУТЬ УЧАСТНИКА ── -->
+<section class="section divider">
   <div class="section-inner">
-    <div class="section-label">Что такое Elevator Pitch</div>
-    <h2 class="section-title">Публичное инвестиционное шоу</h2>
-
-    <div class="role-grid">
-      <div class="role-card"><div class="role-icon">⚖️</div><div class="role-name">Судья</div><div class="role-desc">Ведёт процесс</div></div>
-      <div class="role-card"><div class="role-icon">🎙️</div><div class="role-name">Прокурор</div><div class="role-desc">Ищет слабые места</div></div>
-      <div class="role-card"><div class="role-icon">🛡️</div><div class="role-name">Адвокат</div><div class="role-desc">Защищает проект</div></div>
-      <div class="role-card"><div class="role-icon">💼</div><div class="role-name">Инвестком</div><div class="role-desc">Инвестиционный комитет фонда</div></div>
-    </div>
-
-    <p class="pitch-line">После обсуждения принимается <strong>реальное инвестиционное решение</strong>. Именно к этому событию готовится каждый участник Elevator.</p>
-  </div>
-</section>
-
-<!-- ── КАК ПРОХОДИТ ПРОГРАММА ── -->
-<section class="section" id="how">
-  <div class="section-inner">
-    <div class="section-label">Как проходит программа</div>
-    <h2 class="section-title">Путь от заявки до инвестиционного решения</h2>
-
+    <div class="section-label">Путь участника</div>
+    <h2 class="section-title">От заявки до сцены</h2>
     <div class="stepper">
-      <div class="step"><div class="step-marker"><div class="step-dot">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Подача заявки</div><div class="step-desc">MVP, демо, GitHub, видео</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Отбор</div><div class="step-desc">Оценка проекта и команды</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">3</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Старт батча</div><div class="step-desc">Начало программы</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">4</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Работа с менторами</div><div class="step-desc">Еженедельные спринты</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">5</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Первые пользователи</div><div class="step-desc">Customer Development</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">6</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Первая выручка</div><div class="step-desc">Продажи и Unit Economics</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">7</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Репетиция Pitch</div><div class="step-desc">Mock Pitch с менторами</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">8</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Elevator Pitch</div><div class="step-desc">Публичная защита проекта</div></div></div>
-      <div class="step"><div class="step-marker"><div class="step-dot">9</div></div><div class="step-body"><div class="step-title">Инвестиционное решение</div><div class="step-desc">Финал пути</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Подача заявки</div><div class="step-desc">Рассказываешь о себе, идее или готовом проекте</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Отбор</div><div class="step-desc">Оценка мотивации и готовности пробовать</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">3</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Bootcamp · 8 недель</div><div class="step-desc">Живёшь в цифровом кампусе вместе с другими фаундерами</div></div></div>
+      <div class="step"><div class="step-marker"><div class="step-dot">4</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Demo Day</div><div class="step-desc">Показываешь результат всей когорте и менторам</div></div></div>
+      <div class="step final"><div class="step-marker"><div class="step-dot">5</div></div><div class="step-body"><div class="step-title">Elevator Pitch</div><div class="step-desc">Сцена, инвестиционный комитет, решение вживую</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── ПРИНЦИПЫ ── -->
-<section class="section">
+<!-- ── ЧТО ПРОИСХОДИТ В BOOTCAMP ── -->
+<section class="section divider" id="bootcamp">
   <div class="section-inner">
-    <div class="section-label">Основные принципы программы</div>
-    <p class="big-statement">Не лекции. Не теория. <span class="muted">Максимум практики.</span></p>
-
-    <div class="principle-row">
-      <div class="principle-item"><b>Каждая неделя заканчивается конкретным результатом</b>, а не просмотренным видео.</div>
+    <div class="section-label">Что происходит в Bootcamp</div>
+    <h2 class="section-title">8 недель. 8 уровней. Каждый — как уровень игры.</h2>
+    <p class="section-desc">Следующий уровень открывается только после того, как куратор принял домашнее задание. Прогресс нельзя купить или проскроллить — только пройти.</p>
+    <div class="level-grid">
+      <div class="level-card"><div class="level-tag">Уровень <b>1</b></div><h3>Ценность</h3><p>Почему предпринимательство. Почему именно сейчас. Как AI меняет правила игры.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>2</b></div><h3>Методология</h3><p>Предприниматель как учёный: гипотезы, эксперименты, проверка предположений.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>3</b></div><h3>Команда</h3><p>Поиск единомышленников, распределение ролей и долей.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>4</b></div><h3>Продукт</h3><p>MVP, AI, Vibe Coding — инструмент для проверки гипотез, а не идеальный код.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>5</b></div><h3>Маркетинг</h3><p>Поиск аудитории, контент, PR, вирусное распространение и рост.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>6</b></div><h3>Продажи</h3><p>Первые клиенты, первые деньги, кастдев, юнит-экономика.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>7</b></div><h3>Публичность</h3><p>Storytelling, Elevator Pitch, работа с инвесторами, личный бренд.</p></div>
+      <div class="level-card"><div class="level-tag">Уровень <b>8</b></div><h3>Demo Day</h3><p>Защита проекта и получение инвестиционного решения.</p></div>
     </div>
+  </div>
+</section>
 
-    <div class="example-grid">
-      <div class="example-tag">Провести интервью</div>
-      <div class="example-tag">Привлечь пользователей</div>
-      <div class="example-tag">Сделать первые продажи</div>
-      <div class="example-tag">Обновить финансовую модель</div>
-      <div class="example-tag">Провести репетицию питча</div>
+<!-- ── ПОЧЕМУ ПРОЩЕ СОЗДАТЬ IT-КОМПАНИЮ ── -->
+<section class="section divider">
+  <div class="section-inner">
+    <div class="section-label">Почему сегодня проще создать IT-компанию</div>
+    <p class="statement">Раньше нужна была команда разработчиков. <span class="muted">Сегодня достаточно одного человека и AI.</span></p>
+    <div class="tag-row">
+      <div class="tag">Vibe Coding вместо найма</div>
+      <div class="tag">MVP за недели, а не месяцы</div>
+      <div class="tag">AI как со-разработчик</div>
+      <div class="tag">Ноль порога входа в разработку</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ГЛАВНАЯ ПРОБЛЕМА — МАРКЕТИНГ ── -->
+<section class="section divider">
+  <div class="section-inner">
+    <div class="section-label">Главное ограничение изменилось</div>
+    <p class="statement">Разработка больше не главная проблема. <span class="muted">Главная проблема — маркетинг.</span></p>
+    <div class="tag-row">
+      <div class="tag">Продукты стало легко копировать</div>
+      <div class="tag">Внимание аудитории дороже кода</div>
+      <div class="tag">Побеждает не лучший продукт, а тот, кого заметили</div>
+      <div class="tag">Дистрибуция решает всё</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ПОСЛЕ BOOTCAMP ── -->
+<section class="section divider">
+  <div class="section-inner">
+    <div class="section-label">Что происходит после Bootcamp</div>
+    <h2 class="section-title">Demo Day решает, кто идёт на сцену</h2>
+    <p class="section-desc">На Demo Day каждая команда показывает результат восьми недель работы — трекшн, метрики, готовность продукта. Менторы и инвестиционный комитет оценивают готовность, и лучшие проекты получают приглашение на Elevator Pitch.</p>
+  </div>
+</section>
+
+<!-- ── ИНВЕСТИЦИОННЫЕ РЕШЕНИЯ ── -->
+<section class="section divider">
+  <div class="section-inner">
+    <div class="section-label">Возможные инвестиционные решения</div>
+    <h2 class="section-title">Что может произойти на сцене</h2>
+    <div class="decision-grid">
+      <div class="decision-card"><div class="decision-icon">💰</div><div class="decision-amount blue">150 000 ₽ за 2%</div><div class="decision-desc">Начальная инвестиция от фонда Brainbox</div></div>
+      <div class="decision-card"><div class="decision-icon">👼</div><div class="decision-amount gold">10 000 000 ₽ за 10%</div><div class="decision-desc">Ангельская инвестиция при сильном трекшене</div></div>
+      <div class="decision-card"><div class="decision-icon">🧑‍🏫</div><div class="decision-amount">Назначение ментора</div><div class="decision-desc">Проекту с потенциалом, которому рано для денег</div></div>
+      <div class="decision-card"><div class="decision-icon">📈</div><div class="decision-amount">Рекомендация к размещению раунда</div><div class="decision-desc">Выход на платформу brainbox_I для привлечения инвесторов</div></div>
     </div>
   </div>
 </section>
 
 <!-- ── МЕНТОРЫ ── -->
-<section class="section" id="mentors">
+<section class="section divider" id="mentors">
   <div class="section-inner">
     <div class="section-label">Менторы</div>
     <h2 class="section-title">Действующие предприниматели и инвесторы</h2>
-    <p class="section-desc">Не преподаватели. Люди, которые сами прошли путь от MVP до выручки и инвестиций — и сопровождают команды лично.</p>
-
+    <p class="section-desc">Не преподаватели курсов. Люди, которые сами прошли путь от MVP до выручки и инвестиций — и сопровождают команды лично, всю программу.</p>
     <div class="mentor-grid">
-      <div class="mentor-card"><div class="mentor-avatar">АК</div><div class="mentor-name">Артём Ковалёв</div><div class="mentor-role">Основатель, 2 экзита</div><div class="mentor-desc">Growth и продажи B2B SaaS</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">АК</div><div class="mentor-name">Артём Ковалёв</div><div class="mentor-role">Основатель, 2 экзита</div><div class="mentor-desc">Growth и продажи в B2B SaaS</div></div>
       <div class="mentor-card"><div class="mentor-avatar">МЛ</div><div class="mentor-name">Мария Литвинова</div><div class="mentor-role">Управляющий партнёр фонда</div><div class="mentor-desc">Инвестиционная упаковка и питчинг</div></div>
       <div class="mentor-card"><div class="mentor-avatar">ДС</div><div class="mentor-name">Даниил Соколов</div><div class="mentor-role">Серийный предприниматель</div><div class="mentor-desc">Product Market Fit, Customer Dev</div></div>
       <div class="mentor-card"><div class="mentor-avatar">ЕВ</div><div class="mentor-name">Елена Воронцова</div><div class="mentor-role">CFO нескольких стартапов</div><div class="mentor-desc">Unit Economics и финмодели</div></div>
-      <div class="mentor-card"><div class="mentor-avatar">ИП</div><div class="mentor-name">Игорь Петров</div><div class="mentor-role">Head of Growth</div><div class="mentor-desc">Первые продажи и каналы роста</div></div>
+      <div class="mentor-card"><div class="mentor-avatar">ИП</div><div class="mentor-name">Игорь Петров</div><div class="mentor-role">Head of Growth</div><div class="mentor-desc">Дистрибуция и вирусный рост</div></div>
       <div class="mentor-card"><div class="mentor-avatar">НТ</div><div class="mentor-name">Наталья Титова</div><div class="mentor-role">Инвестиционный аналитик</div><div class="mentor-desc">Due diligence и метрики</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── BATCH #1 ── -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-label">Ближайший набор</div>
-    <div class="batch-card">
-      <div class="batch-head">
-        <div class="batch-num">Batch #1</div>
-        <div class="batch-tag">Набор открыт</div>
-      </div>
-      <div class="batch-dates">
-        <div>
-          <div class="batch-date-label">Старт программы</div>
-          <div class="batch-date-value">Сентябрь 2026</div>
-        </div>
-        <div>
-          <div class="batch-date-label">Приём заявок заканчивается</div>
-          <div class="batch-date-value warn">1 сентября 2026</div>
-        </div>
-        <div>
-          <div class="batch-date-label">Следующий набор</div>
-          <div class="batch-date-value">Декабрь 2026</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── FAQ ── -->
-<section class="section" id="faq">
+<section class="section divider" id="faq">
   <div class="section-inner">
     <div class="section-label">FAQ</div>
     <h2 class="section-title" style="margin-bottom:8px;">Частые вопросы</h2>
-
     <div style="margin-top:32px;">
       <div class="faq-item open">
-        <div class="faq-q">Подходит ли программа, если есть только идея?<span class="plus">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Нет. Нужно иметь работающий MVP.</div></div>
+        <div class="faq-q">Вы обещаете, что я стану единорогом?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет. Мы честно не обещаем единорога. Мы помогаем понять, подходит ли тебе путь предпринимателя — и довести проект до первых продаж и, возможно, инвестиций.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Нужен ли готовый стартап или MVP?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет. Важна готовность пробовать и проходить уровни Bootcamp. Продукт вы соберёте на уровне «Продукт» — с помощью AI и Vibe Coding.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Можно ли участвовать без команды?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Да. Уровень «Команда» помогает найти сооснователей внутри Bootcamp — через каталог участников и поиск по компетенциям.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что если я не дойду до Demo Day?<span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Ты всё равно пройдёшь путь от идеи к первым экспериментам и поймёшь, твоё ли это. Но допуск к Elevator Pitch получают только те, кто прошёл все восемь уровней.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Нужно ли юридическое лицо?<span class="plus">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Нет.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Можно ли участвовать одному?<span class="plus">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Да, если продукт уже существует.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Можно ли попасть сразу на Elevator Pitch?<span class="plus">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Нет. Сначала необходимо пройти программу Elevator.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Нет, на входе не нужно. Юрлицо потребуется только при реальной инвестиции.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── APPLY FORM ── -->
-<section class="section" id="apply">
-  <div class="section-inner">
-    <div class="section-label">Заявка</div>
-    <h2 class="section-title">Подать заявку в Batch #1</h2>
-    <p class="section-desc">Приём заявок закрывается 1 сентября 2026. Ответ приходит после отбора.</p>
-
-    <div class="apply-card">
-      <div class="form-row">
-        <div class="form-field"><label>Название проекта</label><input type="text" placeholder="Название вашего стартапа"></div>
-        <div class="form-field"><label>Имя и роль</label><input type="text" placeholder="Иван Иванов, Founder"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-field"><label>Email</label><input type="email" placeholder="you@startup.com"></div>
-        <div class="form-field"><label>Ссылка на MVP</label><input type="url" placeholder="https://"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-field"><label>GitHub (если применимо)</label><input type="url" placeholder="https://github.com/..."></div>
-        <div class="form-field"><label>Видео демонстрация</label><input type="url" placeholder="Ссылка на демо-видео"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-field full"><label>Коротко о продукте и первых пользователях</label><textarea placeholder="Что делает продукт, кто уже им пользуется..."></textarea></div>
-      </div>
-      <a href="#" class="btn btn-primary btn-hero" style="width:100%;margin-top:8px;">Отправить заявку →</a>
-      <p class="form-hint">Без ссылки на работающий MVP заявка <b>не рассматривается</b>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── GALLERY ── -->
+<!-- ── PRODUCT GALLERY ── -->
 <section class="section screens-section" id="product">
   <div class="section-inner">
-    <div class="section-label">Платформа Elevator</div>
-    <h2 class="section-title">10 экранов продукта</h2>
-    <p class="section-desc">Внутренняя платформа, в которой команда живёт всю программу — от старта батча до допуска на Elevator Pitch.</p>
+    <div class="section-label">Закрытая платформа</div>
+    <h2 class="section-title">Цифровой кампус Bootcamp</h2>
+    <p class="section-desc">Не курс и не LMS. Живая среда, в которой предприниматели восемь недель видят прогресс друг друга, публикуют эксперименты и готовятся к Demo Day вместе.</p>
 
-    <div class="screens-eyebrow-row">Прогресс и работа команды</div>
+    <div class="screens-eyebrow-row">Прогресс и обучение</div>
     <div class="screens-grid" style="margin-bottom:8px;">
-      <a href="dashboard.html" class="screen-card">
-        <div class="screen-preview" style="background:#191410;">🚀</div>
-        <div class="screen-info"><div class="screen-name">Dashboard участника</div><div class="screen-desc">Прогресс и задачи недели</div></div>
-      </a>
-      <a href="progress-map.html" class="screen-card">
-        <div class="screen-preview" style="background:#101915;">🗺️</div>
-        <div class="screen-info"><div class="screen-name">Карта прогресса</div><div class="screen-desc">Путь от MVP до Pitch Ready</div></div>
-      </a>
-      <a href="roadmap.html" class="screen-card">
-        <div class="screen-preview" style="background:#141019;">🧭</div>
-        <div class="screen-info"><div class="screen-name">Roadmap программы</div><div class="screen-desc">12 недель батча</div></div>
-      </a>
-      <a href="sprint.html" class="screen-card">
-        <div class="screen-preview" style="background:#191410;">📋</div>
-        <div class="screen-info"><div class="screen-name">Еженедельный Sprint</div><div class="screen-desc">Kanban текущей недели</div></div>
-      </a>
-      <a href="weekly-task.html" class="screen-card">
-        <div class="screen-preview" style="background:#101915;">🎯</div>
-        <div class="screen-info"><div class="screen-name">Задание недели</div><div class="screen-desc">Детали и сдача результата</div></div>
-      </a>
-      <a href="calendar.html" class="screen-card">
-        <div class="screen-preview" style="background:#141019;">📅</div>
-        <div class="screen-info"><div class="screen-name">Календарь</div><div class="screen-desc">Звонки, дедлайны, Pitch Day</div></div>
-      </a>
+      <a href="dashboard.html" class="screen-card"><div class="screen-preview" style="background:#eef1fd;">🏠</div><div class="screen-info"><div class="screen-name">Dashboard</div><div class="screen-desc">Главная страница участника</div></div></a>
+      <a href="bootcamp.html" class="screen-card"><div class="screen-preview" style="background:#f7efdf;">🎮</div><div class="screen-info"><div class="screen-name">Bootcamp</div><div class="screen-desc">Карта восьми уровней</div></div></a>
+      <a href="level.html" class="screen-card"><div class="screen-preview" style="background:#e7f7f1;">📘</div><div class="screen-info"><div class="screen-name">Страница уровня</div><div class="screen-desc">Видео, конспект, задание</div></div></a>
+      <a href="assignment.html" class="screen-card"><div class="screen-preview" style="background:#eef1fd;">✍️</div><div class="screen-info"><div class="screen-name">Выполнение задания</div><div class="screen-desc">Вопросы и применение к стартапу</div></div></a>
+      <a href="review.html" class="screen-card"><div class="screen-preview" style="background:#f7efdf;">✅</div><div class="screen-info"><div class="screen-name">Проверка задания</div><div class="screen-desc">Кабинет куратора</div></div></a>
     </div>
 
-    <div class="screens-eyebrow-row">Менторство и подготовка к сцене</div>
+    <div class="screens-eyebrow-row">Сообщество и стартапы</div>
     <div class="screens-grid">
-      <a href="mentor-cabinet.html" class="screen-card">
-        <div class="screen-preview" style="background:#191410;">🧑‍🏫</div>
-        <div class="screen-info"><div class="screen-name">Кабинет ментора</div><div class="screen-desc">Команды и обратная связь</div></div>
-      </a>
-      <a href="mock-pitch.html" class="screen-card">
-        <div class="screen-preview" style="background:#101915;">🎤</div>
-        <div class="screen-info"><div class="screen-name">Mock Pitch</div><div class="screen-desc">Репетиция перед сценой</div></div>
-      </a>
-      <a href="pitch-ready.html" class="screen-card">
-        <div class="screen-preview" style="background:#141019;">🏆</div>
-        <div class="screen-info"><div class="screen-name">Pitch Ready</div><div class="screen-desc">Допуск подтверждён</div></div>
-      </a>
-      <a href="pitch-application.html" class="screen-card">
-        <div class="screen-preview" style="background:#191410;">📮</div>
-        <div class="screen-info"><div class="screen-name">Заявка на Elevator Pitch</div><div class="screen-desc">Финальный шаг перед сценой</div></div>
-      </a>
+      <a href="feed.html" class="screen-card"><div class="screen-preview" style="background:#e7f7f1;">📰</div><div class="screen-info"><div class="screen-name">Социальная лента</div><div class="screen-desc">Журнал экспериментов</div></div></a>
+      <a href="directory.html" class="screen-card"><div class="screen-preview" style="background:#eef1fd;">👥</div><div class="screen-info"><div class="screen-name">Каталог участников</div><div class="screen-desc">Поиск команды и специалистов</div></div></a>
+      <a href="profile.html" class="screen-card"><div class="screen-preview" style="background:#f7efdf;">👤</div><div class="screen-info"><div class="screen-name">Профиль участника</div><div class="screen-desc">Навыки, проект, прогресс</div></div></a>
+      <a href="startup.html" class="screen-card"><div class="screen-preview" style="background:#e7f7f1;">🚀</div><div class="screen-info"><div class="screen-name">Страница стартапа</div><div class="screen-desc">Команда, метрики, инвесторы</div></div></a>
+      <a href="demoday.html" class="screen-card"><div class="screen-preview" style="background:#eef1fd;">🏆</div><div class="screen-info"><div class="screen-name">Demo Day</div><div class="screen-desc">Финал и инвестиционные решения</div></div></a>
     </div>
   </div>
 </section>
 
-<!-- ── CTA BOTTOM ── -->
-<div class="cta-bottom">
-  <div class="cta-bottom-title">Batch #1 закрывается<br>1 сентября 2026</div>
-  <p class="cta-bottom-desc">Следующий набор — только в декабре. Если MVP готов, не откладывайте заявку.</p>
-  <a href="#apply" class="btn btn-primary btn-hero">Подать заявку →</a>
+<!-- ── APPLY / FINAL CTA ── -->
+<div class="cta-bottom" id="apply">
+  <div class="cta-bottom-title">Я хочу оказаться на этой сцене</div>
+  <p class="cta-bottom-desc">Приём заявок в ближайший Bootcamp открыт. Восемь недель отделяют тебя от Demo Day и, возможно, от собственной компании.</p>
+  <a href="#" class="btn btn-primary btn-lg">Подать заявку →</a>
 </div>
 
 <footer class="footer">
-  <a href="#" class="footer-logo"><span class="dot"></span>Elevator</a>
-  <div class="footer-note">Часть экосистемы Brainbox · Sandbox → Elevator → Elevator Pitch → brainbox_I</div>
+  <a href="#" class="footer-logo">Elevator Pitch</a>
+  <div class="footer-note">Продукт экосистемы Brainbox · Elevator Bootcamp × Elevator Pitch</div>
 </footer>
 
 <script>
-  // countdown
-  var deadline = new Date('2026-09-01T00:00:00');
-  function tick(){
-    var now = new Date();
-    var diff = Math.max(0, deadline - now);
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
-  }
-  tick();
-  setInterval(tick, 1000);
-
-  // faq accordion
   document.querySelectorAll('.faq-q').forEach(function(q){
     q.addEventListener('click', function(){
       var item = q.parentElement;

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootcamp — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .progress-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 28px;box-shadow:var(--shadow);margin-bottom:44px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;}
+  .progress-main{flex:1;min-width:240px;}
+  .progress-title{font-size:19px;font-weight:700;margin-bottom:14px;}
+  .progress-bar-track{width:100%;height:8px;border-radius:var(--radius-pill);background:var(--border-light);overflow:hidden;margin-bottom:10px;}
+  .progress-bar-fill{height:100%;border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--accent),#3a63f0);}
+  .progress-sub{font-size:13px;color:var(--text-3);}
+  .progress-stat{text-align:center;padding:0 8px;border-left:1px solid var(--border-light);padding-left:28px;}
+  .progress-stat-num{font-family:'Geologica',sans-serif;font-size:28px;font-weight:700;color:var(--accent);line-height:1;}
+  .progress-stat-label{font-size:12px;color:var(--text-3);margin-top:6px;max-width:120px;}
+
+  .page-title{font-size:26px;font-weight:700;margin-bottom:6px;}
+  .page-sub{font-size:14.5px;color:var(--text-3);margin-bottom:40px;}
+
+  .level-path{position:relative;display:flex;flex-direction:column;gap:6px;}
+  .level-path::before{content:'';position:absolute;top:28px;bottom:28px;left:50%;width:1px;background:var(--border);transform:translateX(-.5px);z-index:0;}
+  .level-row{display:flex;position:relative;z-index:1;margin:8px 0;}
+  .level-row.pos-left{justify-content:flex-start;}
+  .level-row.pos-center{justify-content:center;}
+  .level-row.pos-right{justify-content:flex-end;}
+  .level-node{display:flex;align-items:center;gap:16px;}
+  .level-row.pos-right .level-node{flex-direction:row-reverse;text-align:right;}
+  .level-node-inner{display:flex;flex-direction:column;align-items:center;gap:10px;width:110px;}
+  .level-row.pos-left .level-node-inner{align-items:flex-start;}
+  .level-row.pos-right .level-node-inner{align-items:flex-end;}
+  .level-badge{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;font-size:22px;flex-shrink:0;border:1px solid transparent;}
+  .level-badge.done{background:var(--success);color:#fff;box-shadow:0 6px 18px rgba(30,166,114,.25);}
+  .level-badge.current{background:var(--accent);color:#fff;box-shadow:0 0 0 6px var(--accent-light),0 6px 20px rgba(24,71,227,.3);}
+  .level-badge.locked{background:var(--white);color:var(--text-3);border:1px solid var(--border);}
+  .level-name{font-size:14.5px;font-weight:600;}
+  .level-name.muted{color:var(--text-3);font-weight:500;}
+  .level-tagline{font-size:12px;color:var(--text-3);}
+  .level-cta{margin-left:8px;}
+  .level-row.pos-right .level-cta{margin-left:0;margin-right:8px;}
+
+  .footnote{text-align:center;font-size:13px;color:var(--text-3);margin-top:56px;}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link active">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+
+<div class="app-content">
+  <div class="page-title">Bootcamp</div>
+  <div class="page-sub">Восемь уровней между заявкой и Demo Day. Каждый открывается только после проверки куратором.</div>
+
+  <div class="progress-card">
+    <div class="progress-main">
+      <div class="progress-title">5 из 8 уровней пройдено</div>
+      <div class="progress-bar-track"><div class="progress-bar-fill" style="width:56%;"></div></div>
+      <div class="progress-sub">Неделя 5 из 8 · следующий чекпоинт — сдача уровня «Маркетинг»</div>
+    </div>
+    <div class="progress-stat">
+      <div class="progress-stat-num">12</div>
+      <div class="progress-stat-label">дней подряд в кампусе</div>
+    </div>
+  </div>
+
+  <div class="level-path">
+    <div class="level-row pos-left">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge done">✓</div>
+          <div class="level-name">1 · Ценность</div>
+          <div class="level-tagline">пройдено</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-right">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge done">✓</div>
+          <div class="level-name">2 · Методология</div>
+          <div class="level-tagline">пройдено</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-left">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge done">✓</div>
+          <div class="level-name">3 · Команда</div>
+          <div class="level-tagline">пройдено</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-right">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge done">✓</div>
+          <div class="level-name">4 · Продукт</div>
+          <div class="level-tagline">пройдено</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-center">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge current">5</div>
+          <div class="level-name">Маркетинг</div>
+          <div class="level-tagline">текущий уровень</div>
+        </div>
+        <a href="level.html" class="btn btn-primary level-cta">Продолжить →</a>
+      </div>
+    </div>
+    <div class="level-row pos-left">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge locked">🔒</div>
+          <div class="level-name muted">6 · Продажи</div>
+          <div class="level-tagline">закрыт</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-right">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge locked">🔒</div>
+          <div class="level-name muted">7 · Публичность</div>
+          <div class="level-tagline">закрыт</div>
+        </div>
+      </div>
+    </div>
+    <div class="level-row pos-center">
+      <div class="level-node">
+        <div class="level-node-inner">
+          <div class="level-badge locked">🔒</div>
+          <div class="level-name muted">8 · Demo Day</div>
+          <div class="level-tagline">закрыт</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">Прогресс нельзя купить или проскроллить — только пройти. Следующий уровень откроется, когда куратор примет домашнее задание уровня «Маркетинг».</div>
+</div>
+</div>
+</body>
+</html>

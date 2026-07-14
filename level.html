@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Уровень 1 · Ценность — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .level-header{margin-bottom:28px;}
+  .level-eyebrow{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+  .level-h1{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .level-desc{font-size:15px;color:var(--text-2);line-height:1.6;max-width:640px;}
+
+  .video-card{position:relative;background:linear-gradient(160deg,#12151f,#05060a);border-radius:var(--radius-lg);height:340px;display:flex;align-items:center;justify-content:center;margin-bottom:36px;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .video-card::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(24,71,227,.28),transparent 65%);}
+  .video-play{position:relative;width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;cursor:pointer;}
+  .video-duration{position:absolute;bottom:18px;right:20px;font-size:12.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.4);padding:5px 11px;border-radius:var(--radius-pill);}
+  .video-title-overlay{position:absolute;bottom:18px;left:20px;font-size:13px;color:rgba(255,255,255,.7);}
+
+  .section-block{margin-bottom:40px;}
+  .block-title{font-size:19px;font-weight:700;margin-bottom:16px;}
+  .prose h4{font-size:15.5px;font-weight:600;margin:18px 0 8px;}
+  .prose h4:first-child{margin-top:0;}
+  .prose p{font-size:14.5px;color:var(--text-2);line-height:1.7;margin-bottom:4px;}
+
+  .resource-list{display:flex;flex-direction:column;gap:10px;}
+  .resource-row{display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--text);transition:box-shadow .15s,transform .15s;}
+  .resource-row:hover{box-shadow:var(--shadow);transform:translateY(-1px);}
+  .resource-icon{width:36px;height:36px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+  .resource-name{font-size:14px;font-weight:600;}
+  .resource-type{font-size:12px;color:var(--text-3);}
+  .resource-arrow{margin-left:auto;color:var(--text-3);font-size:14px;}
+
+  .reflect-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .reflect-list li{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:14px 18px;font-size:14.5px;color:var(--text-2);line-height:1.55;}
+
+  .hw-panel{background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-lg);padding:28px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;}
+  .hw-panel-title{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .hw-panel-text{font-size:14px;color:var(--text-2);max-width:520px;line-height:1.55;}
+
+  .comment{display:flex;gap:14px;margin-bottom:20px;}
+  .comment:last-child{margin-bottom:0;}
+  .comment-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:13px;flex-shrink:0;}
+  .comment-avatar.mentor{background:linear-gradient(135deg,var(--gold),#6b4a15);}
+  .comment-body{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;flex:1;}
+  .comment-name{font-size:13.5px;font-weight:600;}
+  .comment-name .tag-mentor{font-size:10.5px;font-weight:700;color:var(--gold);background:var(--gold-light);border-radius:var(--radius-pill);padding:2px 8px;margin-left:8px;}
+  .comment-time{font-size:11.5px;color:var(--text-3);font-weight:400;margin-left:8px;}
+  .comment-text{font-size:13.5px;color:var(--text-2);line-height:1.55;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link active">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+<div class="page-breadcrumb"><a href="bootcamp.html">← Bootcamp</a></div>
+
+<div class="app-content">
+  <div class="level-header">
+    <div class="level-eyebrow">Уровень 1 из 8</div>
+    <h1 class="level-h1">Ценность</h1>
+    <p class="level-desc">Почему предпринимательство. Почему именно сейчас. Как AI меняет правила игры для тех, кто решает построить компанию с нуля.</p>
+  </div>
+
+  <div class="video-card">
+    <div class="video-play">▶</div>
+    <div class="video-title-overlay">Лекция · Уровень 1 «Ценность»</div>
+    <div class="video-duration">18:24</div>
+  </div>
+
+  <div class="section-block">
+    <div class="block-title">Конспект</div>
+    <div class="prose">
+      <h4>Почему предпринимательство важнее, чем кажется</h4>
+      <p>Предпринимательство — не побочная карьерная опция для тех, кто «не смог найти нормальную работу». Это единственный способ создать ценность, которая не существовала до вас, и присвоить себе право распоряжаться результатом. Наёмный труд обменивает время на зарплату; компания — это актив, который продолжает создавать ценность, даже когда вы спите.</p>
+      <h4>Почему именно сейчас</h4>
+      <p>Стоимость запуска IT-продукта упала быстрее, чем когда-либо в истории. Раньше между идеей и работающим продуктом стояла команда разработчиков, месяцы найма и бюджет на инфраструктуру. Сегодня это расстояние можно пройти в одиночку за недели. Окно возможностей открыто именно потому, что инструменты стали доступны раньше, чем рынок успел заполниться конкурентами, понявшими это.</p>
+      <h4>Как AI меняет правила игры</h4>
+      <p>AI не заменяет предпринимателя — он заменяет оправдания. Раньше нужно было быть техническим специалистом, чтобы проверить гипотезу продукта. Сейчас гипотезу можно упаковать в рабочий прототип через Vibe Coding за считаные дни. Это смещает главный вопрос стартапа с «смогу ли я это построить» на «нужен ли кому-то результат» — и именно второй вопрос теперь решает всё.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="block-title">Материалы</div>
+    <div class="resource-list">
+      <a href="#" class="resource-row"><div class="resource-icon">📄</div><div><div class="resource-name">«Идеальное время»: разбор циклов технологических окон возможностей</div><div class="resource-type">Статья · 7 мин чтения</div></div><div class="resource-arrow">→</div></a>
+      <a href="#" class="resource-row"><div class="resource-icon">🎧</div><div><div class="resource-name">Подкаст с Даниилом Соколовым: «Почему я запустил четвёртый стартап, а не пятый найм»</div><div class="resource-type">Аудио · 32 мин</div></div><div class="resource-arrow">→</div></a>
+      <a href="#" class="resource-row"><div class="resource-icon">📊</div><div><div class="resource-name">Отчёт: как изменилась стоимость запуска MVP за последние 5 лет</div><div class="resource-type">PDF · датасет и графики</div></div><div class="resource-arrow">→</div></a>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="block-title">Вопросы для размышления</div>
+    <ul class="reflect-list">
+      <li>Что вы готовы строить даже если бы никто не платил вам за это первые полгода?</li>
+      <li>Какое технологическое изменение последних двух лет напрямую снижает порог входа в вашу нишу?</li>
+      <li>Если бы AI не существовал, отказались бы вы от идеи — или просто шли бы к ней дольше?</li>
+    </ul>
+  </div>
+
+  <div class="hw-panel">
+    <div>
+      <div class="hw-panel-title">Домашнее задание</div>
+      <div class="hw-panel-text">Сформулируйте гипотезу ценности вашего продукта и объясните, почему именно сейчас подходящий момент для вашей идеи. Займёт 15–20 минут.</div>
+    </div>
+    <a href="assignment.html" class="btn btn-primary">Перейти к заданию →</a>
+  </div>
+
+  <div class="section-block" style="margin-top:40px;">
+    <div class="block-title">Обсуждение</div>
+    <div class="comment">
+      <div class="comment-avatar">МК</div>
+      <div class="comment-body">
+        <div class="comment-name">Марина Кузнецова<span class="comment-time">2 дня назад</span></div>
+        <div class="comment-text">Мысль про «AI заменяет оправдания» прямо перевернула. Я полгода откладывала запуск, потому что «не умею кодить» — а по факту MVP собрала за выходные.</div>
+      </div>
+    </div>
+    <div class="comment">
+      <div class="comment-avatar">РГ</div>
+      <div class="comment-body">
+        <div class="comment-name">Рустам Газизов<span class="comment-time">2 дня назад</span></div>
+        <div class="comment-text">А как понять, что окно возможностей ещё открыто, а не уже закрылось? Хочется более чёткого критерия, чем «ощущение».</div>
+      </div>
+    </div>
+    <div class="comment">
+      <div class="comment-avatar mentor">ДС</div>
+      <div class="comment-body">
+        <div class="comment-name">Даниил Соколов<span class="tag-mentor">ментор</span><span class="comment-time">1 день назад</span></div>
+        <div class="comment-text">Рустам, хороший вопрос — на уровне «Методология» разберём, как проверять это гипотезами, а не интуицией. Пока ориентир простой: если конкуренты решают проблему вручную или дорого — окно ещё открыто.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Day — Elevator Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .dd-head{margin-bottom:28px;}
+  .dd-eyebrow{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+  .dd-title{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .dd-date{font-size:14px;color:var(--text-2);font-weight:600;margin-bottom:10px;}
+  .dd-frame{font-size:14.5px;color:var(--text-3);max-width:640px;line-height:1.55;}
+
+  .dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;}
+  .dd-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;}
+  .dd-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+  .dd-name{font-size:16px;font-weight:700;}
+  .dd-one-liner{font-size:12.5px;color:var(--text-3);line-height:1.45;margin-top:2px;}
+  .status-tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:var(--radius-pill);padding:4px 10px;white-space:nowrap;flex-shrink:0;}
+  .status-tag.ready{background:var(--success-light);color:var(--success);}
+  .status-tag.almost{background:var(--gold-light);color:var(--gold);}
+  .status-tag.progress{background:var(--border-light);color:var(--text-3);}
+
+  .video-thumb{height:86px;border-radius:10px;background:linear-gradient(135deg,#0b0d16,#1c2136);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);font-size:13px;font-weight:600;gap:6px;}
+
+  .score-row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2);}
+  .score-row b{font-family:'Geologica',sans-serif;font-size:14px;color:var(--text);}
+  .stars{color:var(--gold);letter-spacing:1px;}
+
+  .decision-ribbon{border-radius:10px;padding:12px 14px;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.3;}
+  .decision-ribbon.fund{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-muted);}
+  .decision-ribbon.angel{background:var(--gold-light);color:var(--gold);border:1px solid #e6cd9a;}
+  .decision-ribbon.mentor{background:var(--border-light);color:var(--text-2);border:1px solid var(--border);}
+  .decision-ribbon.platform{background:var(--accent-light);color:var(--accent-hover);border:1px solid var(--accent-muted);}
+  .decision-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);font-weight:700;margin-bottom:6px;}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link active">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+<div class="app-content">
+
+  <div class="dd-head">
+    <div class="dd-eyebrow">Финал Bootcamp</div>
+    <h1 class="dd-title">Demo Day · Batch #1</h1>
+    <div class="dd-date">4 августа 2026 · онлайн-трансляция для всей когорты и менторов</div>
+    <p class="dd-frame">Восемь недель работы — в одном питче. Менторы и инвестиционный комитет оценивают готовность каждой команды; часть проектов уже сегодня получает предложение, остальные продолжат путь к сцене Elevator Pitch.</p>
+  </div>
+
+  <div class="dd-grid">
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">Nova Metrics</div><div class="dd-one-liner">B2B AI-аналитика для e-commerce: прогноз оттока и точек роста выручки</div></div><div class="status-tag ready">Готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 3:00</div>
+      <div class="score-row">Оценка менторов <b>9.1 / 10</b> <span class="stars">★★★★★</span></div>
+      <div>
+        <div class="decision-label">Решение инвестиционного комитета</div>
+        <div class="decision-ribbon angel">👼 10 000 000 ₽ за 10%</div>
+      </div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">FinFlow</div><div class="dd-one-liner">Автоматизация финансового учёта для микробизнеса и самозанятых</div></div><div class="status-tag ready">Готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:54</div>
+      <div class="score-row">Оценка менторов <b>8.4 / 10</b> <span class="stars">★★★★☆</span></div>
+      <div>
+        <div class="decision-label">Решение инвестиционного комитета</div>
+        <div class="decision-ribbon fund">💰 150 000 ₽ за 2%</div>
+      </div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">RentalPro</div><div class="dd-one-liner">Платформа управления краткосрочной арендой жилья для частных хозяев</div></div><div class="status-tag ready">Готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 3:00</div>
+      <div class="score-row">Оценка менторов <b>8.0 / 10</b> <span class="stars">★★★★☆</span></div>
+      <div>
+        <div class="decision-label">Решение инвестиционного комитета</div>
+        <div class="decision-ribbon platform">📈 Рекомендован к размещению раунда</div>
+      </div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">HealthPing</div><div class="dd-one-liner">Напоминания и трекинг приёма лекарств для хронических пациентов</div></div><div class="status-tag almost">Почти готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:47</div>
+      <div class="score-row">Оценка менторов <b>7.2 / 10</b> <span class="stars">★★★☆☆</span></div>
+      <div>
+        <div class="decision-label">Решение инвестиционного комитета</div>
+        <div class="decision-ribbon mentor">🧑‍🏫 Назначен ментор</div>
+      </div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">EduSpark</div><div class="dd-one-liner">Персонализированные тренажёры для подготовки к ЕГЭ на базе AI</div></div><div class="status-tag almost">Почти готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:38</div>
+      <div class="score-row">Оценка менторов <b>7.6 / 10</b> <span class="stars">★★★★☆</span></div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">CargoLink</div><div class="dd-one-liner">Биржа грузоперевозок для малого и среднего бизнеса</div></div><div class="status-tag progress">В процессе</div></div>
+      <div class="video-thumb">▶ Запись питча · 1:59</div>
+      <div class="score-row">Оценка менторов <b>6.1 / 10</b> <span class="stars">★★★☆☆</span></div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">PetCare AI</div><div class="dd-one-liner">Диагностика заболеваний домашних животных по фото и симптомам</div></div><div class="status-tag ready">Готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:51</div>
+      <div class="score-row">Оценка менторов <b>7.9 / 10</b> <span class="stars">★★★★☆</span></div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">BuildMate</div><div class="dd-one-liner">Маркетплейс проверенных бригад для ремонта квартир</div></div><div class="status-tag almost">Почти готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:20</div>
+      <div class="score-row">Оценка менторов <b>6.8 / 10</b> <span class="stars">★★★☆☆</span></div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">GreenBasket</div><div class="dd-one-liner">Подписка на фермерские продукты с доставкой день в день</div></div><div class="status-tag progress">В процессе</div></div>
+      <div class="video-thumb">▶ Запись питча · 1:42</div>
+      <div class="score-row">Оценка менторов <b>5.4 / 10</b> <span class="stars">★★★☆☆</span></div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-card-top"><div><div class="dd-name">LawLoop</div><div class="dd-one-liner">AI-ассистент для проверки договоров малого бизнеса</div></div><div class="status-tag ready">Готов</div></div>
+      <div class="video-thumb">▶ Запись питча · 2:56</div>
+      <div class="score-row">Оценка менторов <b>8.6 / 10</b> <span class="stars">★★★★★</span></div>
+      <div>
+        <div class="decision-label">Решение инвестиционного комитета</div>
+        <div class="decision-ribbon fund">💰 150 000 ₽ за 2%</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+</body>
+</html>

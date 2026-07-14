@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Metrics — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .repo-header{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 26px 20px;margin-bottom:20px;box-shadow:var(--shadow);}
+  .repo-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .repo-icon{width:38px;height:38px;border-radius:10px;background:var(--accent-light);border:1px solid var(--accent-muted);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .repo-title{font-size:22px;font-weight:700;}
+  .repo-vis{font-size:11.5px;font-weight:600;color:var(--text-3);background:var(--border-light);border:1px solid var(--border);border-radius:var(--radius-pill);padding:3px 11px;}
+  .repo-desc{font-size:14.5px;color:var(--text-2);margin-bottom:16px;}
+  .stat-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+  .stat-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--text-2);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;}
+  .stat-badge b{color:var(--text);}
+  .stat-badge.up{color:var(--success);}
+  .tab-bar{display:flex;gap:4px;border-top:1px solid var(--border-light);padding-top:14px;}
+  .tab{font-size:13.5px;font-weight:600;color:var(--text-3);padding:9px 6px;border-bottom:2px solid transparent;cursor:default;}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+  .card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow);margin-bottom:20px;}
+  .card-title{font-size:15px;font-weight:700;font-family:'Geologica',sans-serif;margin-bottom:16px;}
+
+  .team-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .team-member{display:flex;align-items:center;gap:10px;}
+  .team-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:14px;}
+  .team-avatar.alt{background:linear-gradient(135deg,var(--gold),#c98f2e);}
+  .team-name{font-size:13.5px;font-weight:700;}
+  .team-role{font-size:12px;color:var(--text-3);}
+
+  .status-p{font-size:14.5px;color:var(--text-2);line-height:1.65;}
+
+  .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;}
+  .metric-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;}
+  .metric-value{font-size:22px;font-weight:700;font-family:'Geologica',sans-serif;margin-bottom:2px;}
+  .metric-label{font-size:12px;color:var(--text-3);}
+  .metric-delta{font-size:11.5px;font-weight:600;color:var(--success);margin-top:4px;}
+
+  .feed-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-light);}
+  .feed-item:last-child{border-bottom:none;padding-bottom:0;}
+  .feed-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1ea672,#0b7a4d);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:11px;flex-shrink:0;}
+  .feed-body{flex:1;}
+  .feed-top{display:flex;align-items:baseline;gap:8px;font-size:13px;margin-bottom:2px;}
+  .feed-name{font-weight:700;color:var(--text);}
+  .feed-time{font-size:11.5px;color:var(--text-3);}
+  .feed-text{font-size:13.5px;color:var(--text-2);line-height:1.5;}
+
+  .quote-block{border-left:3px solid var(--accent-muted);padding:4px 0 4px 16px;margin-bottom:16px;}
+  .quote-block:last-child{margin-bottom:0;}
+  .quote-text{font-size:14.5px;color:var(--text-2);font-style:italic;line-height:1.6;margin-bottom:8px;}
+  .quote-attr{font-size:12.5px;font-weight:700;color:var(--text);}
+  .quote-attr span{font-weight:500;color:var(--text-3);}
+
+  .progress-track{width:100%;height:9px;border-radius:var(--radius-pill);background:var(--border-light);overflow:hidden;margin:12px 0 16px;}
+  .progress-fill{height:100%;border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--accent),#4a6bf0);}
+  .check-list{display:flex;flex-direction:column;gap:2px;}
+  .check-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border-light);}
+  .check-item:last-child{border-bottom:none;padding-bottom:0;}
+  .check-mark{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;}
+  .check-mark.done{background:var(--success);border-color:var(--success);}
+  .check-text{font-size:14px;color:var(--text-2);}
+  .check-item.done .check-text{color:var(--text);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+<div class="page-breadcrumb"><a href="profile.html">← Профиль</a></div>
+<div class="app-content">
+
+  <div class="repo-header">
+    <div class="repo-title-row">
+      <div class="repo-icon">🚀</div>
+      <div class="repo-title">Nova Metrics</div>
+      <div class="repo-vis">Batch #1</div>
+    </div>
+    <div class="repo-desc">B2B AI-аналитика для e-commerce — предсказывает отток и точки роста выручки на основе данных о поведении покупателей.</div>
+    <div class="stat-row">
+      <div class="stat-badge">📍 Неделя <b>5/8</b></div>
+      <div class="stat-badge">💵 MRR <b>96 000 ₽</b></div>
+      <div class="stat-badge">👤 <b>214</b> пользователей</div>
+      <div class="stat-badge up">📈 <b>+38</b> за неделю</div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab active">Обзор</div>
+      <div class="tab">Эксперименты</div>
+      <div class="tab">Обсуждение</div>
+      <div class="tab">Инвесторы</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Команда</div>
+    <div class="team-row">
+      <div class="team-member"><div class="team-avatar">ИИ</div><div><div class="team-name">Илья Ильин</div><div class="team-role">Founder · Product & Growth</div></div></div>
+      <div class="team-member"><div class="team-avatar alt">ВС</div><div><div class="team-name">Виктория Седова</div><div class="team-role">Co-founder · Data & AI</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Текущий статус</div>
+    <p class="status-p">Nova Metrics прошла кастдев с 24 e-commerce компаниями и запустила платный доступ к дашборду прогноза оттока. Основной канал роста сейчас — холодные рассылки владельцам интернет-магазинов с оборотом от 5 млн ₽/мес, конверсия в демо держится на уровне 9%. На этой неделе команда тестирует партнёрскую интеграцию с CMS-платформой, чтобы снизить стоимость привлечения.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ключевые метрики</div>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="metric-value">96 000 ₽</div><div class="metric-label">MRR</div><div class="metric-delta">+19% за неделю</div></div>
+      <div class="metric-card"><div class="metric-value">214</div><div class="metric-label">Активных пользователей</div><div class="metric-delta">+38 за неделю</div></div>
+      <div class="metric-card"><div class="metric-value">9%</div><div class="metric-label">Конверсия в демо</div><div class="metric-delta">+2 п.п.</div></div>
+      <div class="metric-card"><div class="metric-value">6.4%</div><div class="metric-label">Отток (месячный)</div><div class="metric-delta">−1.1 п.п.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Последние эксперименты</div>
+    <div class="feed-item">
+      <div class="feed-avatar">ИИ</div>
+      <div class="feed-body">
+        <div class="feed-top"><span class="feed-name">Илья Ильин</span><span class="feed-time">вчера</span></div>
+        <div class="feed-text">Запустили вторую волну холодных рассылок с фокусом на нишу beauty-ритейла — открываемость 41%, 6 демо назначено за 2 дня.</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-avatar alt" style="background:linear-gradient(135deg,var(--gold),#c98f2e);">ВС</div>
+      <div class="feed-body">
+        <div class="feed-top"><span class="feed-name">Виктория Седова</span><span class="feed-time">3 дня назад</span></div>
+        <div class="feed-text">Пересобрали модель прогноза оттока — точность выросла с 78% до 86% на тестовой выборке из 40 000 клиентов.</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-avatar">ИИ</div>
+      <div class="feed-body">
+        <div class="feed-top"><span class="feed-name">Илья Ильин</span><span class="feed-time">5 дней назад</span></div>
+        <div class="feed-text">Закрыли первого клиента с чеком 15 000 ₽/мес — сеть из 6 интернет-магазинов косметики.</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-avatar alt" style="background:linear-gradient(135deg,var(--gold),#c98f2e);">ВС</div>
+      <div class="feed-body">
+        <div class="feed-top"><span class="feed-name">Виктория Седова</span><span class="feed-time">неделю назад</span></div>
+        <div class="feed-text">Провалившийся эксперимент: интеграция с Telegram-ботом не дала роста активации, откатили и вернулись к email-онбордингу.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Рекомендации менторов</div>
+    <div class="quote-block">
+      <div class="quote-text">«Nova Metrics — один из немногих проектов в потоке, где метрики удержания реально считаются правильно. Если удержите темп роста MRR — готовьтесь к серьёзному разговору на Demo Day.»</div>
+      <div class="quote-attr">Елена Воронцова <span>· CFO нескольких стартапов</span></div>
+    </div>
+    <div class="quote-block">
+      <div class="quote-text">«Хороший пример точечного маркетинга: не пытаются продать всем подряд, а бьют строго в нишу с понятным LTV. Именно так и растут B2B SaaS.»</div>
+      <div class="quote-attr">Артём Ковалёв <span>· Основатель, 2 экзита</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Готовность к Demo Day</div>
+    <div class="progress-track"><div class="progress-fill" style="width:70%;"></div></div>
+    <div class="check-list">
+      <div class="check-item done"><div class="check-mark done">✓</div><div class="check-text">Метрики подтверждены</div></div>
+      <div class="check-item done"><div class="check-mark done">✓</div><div class="check-text">Команда укомплектована</div></div>
+      <div class="check-item"><div class="check-mark"></div><div class="check-text">Питч-дек готов</div></div>
+      <div class="check-item"><div class="check-mark"></div><div class="check-text">Финансовая модель готова</div></div>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>

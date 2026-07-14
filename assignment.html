@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задание — Elevator Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#f4f2ee;
+    --white:#ffffff;
+    --text:#12151f;
+    --text-2:#444c5e;
+    --text-3:#8891a6;
+    --accent:#1847e3;
+    --accent-hover:#1238c0;
+    --accent-light:#eef1fd;
+    --accent-muted:#c7d0f9;
+    --border:#e0dcd4;
+    --border-light:#ebebee;
+    --success:#1ea672;
+    --success-light:#e7f7f1;
+    --gold:#9c6b1f;
+    --gold-light:#f7efdf;
+    --shadow:0 1px 3px rgba(18,21,31,.06);
+    --shadow-md:0 8px 32px rgba(18,21,31,.10);
+    --shadow-lg:0 24px 64px rgba(18,21,31,.14);
+    --radius:10px;
+    --radius-lg:16px;
+    --radius-pill:100px;
+  }
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;}
+  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:var(--white);}
+  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 8px 24px rgba(24,71,227,.25);}
+  .btn-ghost{background:none;color:var(--text-2);border:1px solid var(--border);}
+  .btn-ghost:hover{background:var(--white);color:var(--text);}
+
+  .app-body{background:var(--bg);min-height:100vh;}
+  .app-topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,242,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 24px;}
+  .topbar-logo{font-family:'Geologica',sans-serif;font-size:16px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;}
+  .topbar-logo span{color:var(--accent);}
+  .topbar-badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-muted);border-radius:var(--radius-pill);padding:4px 11px;margin-left:10px;margin-right:18px;flex-shrink:0;}
+  .topbar-nav{display:none;align-items:center;gap:2px;}
+  @media(min-width:920px){.topbar-nav{display:flex;}}
+  .topbar-link{font-size:13.5px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 13px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s;}
+  .topbar-link:hover{background:var(--white);color:var(--text);}
+  .topbar-link.active{background:var(--accent-light);color:var(--accent);font-weight:600;}
+  .topbar-spacer{flex:1;}
+  .topbar-search{display:none;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:7px 14px;font-size:13px;color:var(--text-3);width:200px;}
+  .topbar-search input{border:none;outline:none;background:none;font-family:'Onest',sans-serif;font-size:13px;color:var(--text);width:100%;}
+  @media(min-width:1080px){.topbar-search{display:flex;}}
+  .topbar-icon-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;margin-left:10px;flex-shrink:0;}
+  .badge-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ff3b3b;border:1.5px solid var(--bg);}
+  .topbar-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:12.5px;text-decoration:none;margin-left:10px;flex-shrink:0;}
+  .page-breadcrumb{max-width:960px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--text-3);}
+  .page-breadcrumb a{color:var(--text-2);text-decoration:none;font-weight:600;}
+  .page-breadcrumb a:hover{color:var(--accent);}
+  .app-content{max-width:960px;margin:0 auto;padding:28px 24px 80px;}
+
+  .a-header{margin-bottom:8px;}
+  .a-eyebrow{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+  .a-h1{font-size:27px;font-weight:700;margin-bottom:10px;}
+  .autosave-hint{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-3);background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;margin-bottom:36px;}
+  .autosave-dot{width:6px;height:6px;border-radius:50%;background:var(--success);flex-shrink:0;}
+
+  .q-block{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 28px;margin-bottom:20px;}
+  .q-num{font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .q-title{font-size:16.5px;font-weight:600;margin-bottom:18px;line-height:1.4;}
+  .q-title .req{color:var(--accent);}
+
+  .choice-list{display:flex;flex-direction:column;gap:10px;}
+  .choice-card{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;}
+  .choice-card:hover{border-color:var(--accent-muted);background:var(--accent-light);}
+  .choice-card.selected{border-color:var(--accent);background:var(--accent-light);}
+  .choice-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:1px;position:relative;}
+  .choice-card.selected .choice-radio{border-color:var(--accent);}
+  .choice-card.selected .choice-radio::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--accent);}
+  .choice-text{font-size:14px;color:var(--text-2);line-height:1.5;}
+  .choice-card.selected .choice-text{color:var(--text);font-weight:500;}
+
+  textarea{width:100%;font-family:'Onest',sans-serif;font-size:14px;color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;resize:vertical;min-height:90px;background:var(--bg);outline:none;line-height:1.55;}
+  textarea:focus{border-color:var(--accent);background:var(--white);}
+  .q-hint{font-size:12.5px;color:var(--text-3);margin-top:8px;}
+
+  .submit-row{display:flex;justify-content:flex-end;margin-top:32px;}
+  .btn-lg{font-size:15.5px;padding:14px 30px;border-radius:var(--radius-pill);}
+</style>
+</head>
+<body>
+<div class="app-body">
+<header class="app-topbar">
+  <a href="dashboard.html" class="topbar-logo">Elevator<span>.</span>Pitch</a>
+  <div class="topbar-badge">Bootcamp · Batch #1</div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html" class="topbar-link">🏠 Dashboard</a>
+    <a href="bootcamp.html" class="topbar-link active">🎮 Bootcamp</a>
+    <a href="feed.html" class="topbar-link">📰 Лента</a>
+    <a href="directory.html" class="topbar-link">👥 Участники</a>
+    <a href="demoday.html" class="topbar-link">🏆 Demo Day</a>
+  </nav>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-search">🔍<input type="text" placeholder="Поиск по кампусу..."></div>
+  <button class="topbar-icon-btn">🔔<span class="badge-dot"></span></button>
+  <a href="profile.html" class="topbar-avatar">ИИ</a>
+</header>
+<div class="page-breadcrumb"><a href="level.html">← Уровень 1 · Ценность</a></div>
+
+<div class="app-content">
+  <div class="a-header">
+    <div class="a-eyebrow">Домашнее задание · Уровень 1</div>
+    <h1 class="a-h1">Ценность</h1>
+  </div>
+  <div class="autosave-hint"><span class="autosave-dot"></span>Ответы сохраняются автоматически</div>
+
+  <div class="q-block">
+    <div class="q-num">Вопрос 1 из 4 · выбор одного варианта</div>
+    <div class="q-title">Почему сейчас подходящее время для AI-стартапа?</div>
+    <div class="choice-list">
+      <label class="choice-card selected"><div class="choice-radio"></div><div class="choice-text">Стоимость разработки MVP упала настолько, что один человек может проверить гипотезу без команды и бюджета на найм</div></label>
+      <label class="choice-card"><div class="choice-radio"></div><div class="choice-text">Все инвесторы сейчас вкладываются исключительно в проекты с AI в названии</div></label>
+      <label class="choice-card"><div class="choice-radio"></div><div class="choice-text">Конкуренция полностью отсутствует, потому что рынок ещё никто не занял</div></label>
+      <label class="choice-card"><div class="choice-radio"></div><div class="choice-text">Государство ввело льготы специально для IT-предпринимателей</div></label>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num">Вопрос 2 из 4 · открытый ответ</div>
+    <div class="q-title">Опишите вашу гипотезу в одном предложении</div>
+    <textarea placeholder="Например: если дать e-commerce-магазинам простой AI-инструмент для анализа причин отказов, они смогут вернуть 5–10% потерянной выручки без найма аналитика.">Если дать небольшим e-commerce-магазинам инструмент, который на лету находит причины отказов и падения конверсии без найма аналитика, они смогут вернуть 5–10% выручки, которую сейчас теряют незаметно.</textarea>
+    <div class="q-hint">Одно предложение, без вводных фраз — как если бы отвечали на вопрос инвестора.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num">Вопрос 3 из 4 · применение к своему стартапу</div>
+    <div class="q-title">Опишите ценность вашего продукта.</div>
+    <textarea placeholder="Опишите ценность вашего продукта."></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num">Вопрос 4 из 4 · применение к своему стартапу</div>
+    <div class="q-title">Почему пользователь должен выбрать именно вас?</div>
+    <textarea placeholder="Почему пользователь должен выбрать именно вас?"></textarea>
+  </div>
+
+  <div class="submit-row">
+    <a href="#" class="btn btn-primary btn-lg">Проверить работу →</a>
+  </div>
+</div>
+</div>
+<script>
+  document.querySelectorAll('.choice-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      card.parentElement.querySelectorAll('.choice-card').forEach(function(c){c.classList.remove('selected');});
+      card.classList.add('selected');
+    });
+  });
+</script>
+</body>
+</html>

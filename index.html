@@ -6,7 +6,7 @@
 <title>Elevator Pitch — 3 минуты, которые могут изменить твою жизнь</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Geologica:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
@@ -15,10 +15,10 @@
     --text:#12151f;
     --text-2:#444c5e;
     --text-3:#8891a6;
-    --accent:#1847e3;
-    --accent-hover:#1238c0;
-    --accent-light:#eef1fd;
-    --accent-muted:#c7d0f9;
+    --accent:#2e85ec;
+    --accent-hover:#2468b8;
+    --accent-light:#f0f6fe;
+    --accent-muted:#b0d1f8;
     --border:#e0dcd4;
     --border-light:#ebebee;
     --success:#1ea672;
@@ -27,10 +27,6 @@
     --gold-light:#f7efdf;
     --hero-coral:#e8604a;
     --hero-coral-dark:#d6492f;
-    --hero-rose:#fbe6e2;
-    --hero-rose-border:#f3c9c1;
-    --hero-sky:#3fa0e0;
-    --hero-sky-dark:#1e7bb8;
     --hero-navy:#0f1b2b;
     --shadow:0 1px 3px rgba(18,21,31,.06);
     --shadow-md:0 8px 32px rgba(18,21,31,.10);
@@ -40,21 +36,19 @@
     --radius-pill:100px;
   }
   html{font-size:16px;scroll-behavior:smooth;}
-  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  h1,h2,h3,h4{font-family:'Geologica',sans-serif;letter-spacing:-.02em;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Zen Antique Soft',serif;font-weight:400;letter-spacing:-.005em;}
   a{color:inherit;}
   .container{max-width:1120px;margin:0 auto;padding:0 24px;}
 
   /* ── NAV ── */
   .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(244,242,238,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;}
   .nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px;}
-  .nav-logo{font-family:'Geologica',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.03em;text-decoration:none;color:var(--text);flex-shrink:0;}
-  .nav-logo span{color:var(--accent);}
   .nav-spacer{flex:1;}
   .nav-links{display:none;align-items:center;gap:2px;}
   .nav-link{font-size:14px;font-weight:500;color:var(--text-2);text-decoration:none;padding:8px 14px;border-radius:var(--radius-pill);transition:background .15s,color .15s;}
   .nav-link:hover{background:var(--white);color:var(--text);}
-  .btn{font-family:'Onest',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
+  .btn{font-family:'Inter',sans-serif;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .15s,box-shadow .15s;}
   .btn:active{transform:scale(.97);}
   .btn-nav{font-size:14px;padding:9px 18px;border-radius:var(--radius-pill);}
   .btn-primary{background:var(--accent);color:var(--white);}
@@ -63,9 +57,10 @@
   .btn-ghost:hover{background:var(--white);color:var(--text);}
   @media(min-width:900px){.nav-links{display:flex;}}
 
-  .nav-logo-wrap{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;}
-  .nav-badge{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--hero-sky),var(--hero-sky-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Geologica',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;}
-  .nav-wordmark{font-family:'Geologica',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;color:var(--text);}
+  .nav-logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+  .nav-badge{width:30px;height:31px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .nav-badge svg{width:100%;height:100%;}
+  .nav-wordmark{font-family:'Zen Antique Soft',serif;font-weight:400;font-size:19px;letter-spacing:0;color:var(--text);}
 
   .btn-lg{font-size:16px;padding:15px 32px;border-radius:var(--radius-pill);}
   .btn-hero-dark{background:var(--hero-navy);color:#fff;}
@@ -79,11 +74,11 @@
   .hero-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
   @media(min-width:980px){.hero-grid{grid-template-columns:1.05fr 1fr;}}
 
-  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#8a3324;background:var(--hero-rose);border:1px solid var(--hero-rose-border);border-radius:var(--radius-pill);padding:7px 16px 7px 12px;margin-bottom:26px;}
-  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--hero-coral);flex-shrink:0;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent-hover);background:rgba(46,133,236,.10);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(46,133,236,.28);border-radius:var(--radius-pill);padding:7px 16px 7px 12px;margin-bottom:26px;}
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 
-  .hero-title{font-size:clamp(38px,5vw,58px);font-weight:700;line-height:1.06;letter-spacing:-.02em;margin-bottom:22px;color:var(--text);}
-  .hero-title .hl{color:var(--hero-coral);}
+  .hero-title{font-size:clamp(38px,5vw,60px);font-weight:400;line-height:1.1;letter-spacing:-.005em;margin-bottom:22px;color:var(--text);}
+  .hero-title .hl{color:var(--accent);}
 
   .hero-sub{font-size:18px;line-height:1.6;color:var(--text-2);max-width:480px;margin-bottom:34px;}
 
@@ -104,14 +99,14 @@
   .section{padding:96px 24px;}
   .section-inner{max-width:960px;margin:0 auto;}
   .section-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
-  .section-title{font-size:clamp(26px,4vw,38px);font-weight:700;margin-bottom:16px;line-height:1.18;}
+  .section-title{font-size:clamp(26px,4vw,38px);font-weight:400;margin-bottom:16px;line-height:1.22;}
   .section-desc{font-size:17px;color:var(--text-2);line-height:1.65;max-width:640px;margin-bottom:48px;}
   .divider{border-top:1px solid var(--border);}
 
   /* how the show works */
   .show-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
   .show-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 24px;box-shadow:var(--shadow);}
-  .show-num{font-family:'Geologica',sans-serif;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px;}
+  .show-num{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px;}
   .show-card h3{font-size:17px;font-weight:600;margin-bottom:8px;}
   .show-card p{font-size:14px;color:var(--text-3);line-height:1.55;}
 
@@ -120,7 +115,7 @@
   .step{display:flex;gap:20px;position:relative;padding-bottom:32px;}
   .step:last-child{padding-bottom:0;}
   .step-marker{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
-  .step-dot{width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-size:14px;font-weight:700;color:var(--text-2);}
+  .step-dot{width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--text-2);}
   .step.final .step-dot{background:var(--accent);border-color:var(--accent);color:#fff;}
   .step-line{width:1px;flex:1;background:var(--border);margin-top:6px;}
   .step-body{padding-top:5px;}
@@ -137,7 +132,7 @@
   .level-card p{font-size:13px;color:var(--text-3);line-height:1.5;}
 
   /* statement blocks */
-  .statement{font-size:clamp(22px,3.4vw,30px);font-weight:600;line-height:1.4;font-family:'Geologica',sans-serif;margin-bottom:36px;}
+  .statement{font-size:clamp(22px,3.4vw,30px);font-weight:400;line-height:1.4;font-family:'Zen Antique Soft',serif;margin-bottom:36px;}
   .statement .muted{color:var(--text-3);}
   .tag-row{display:flex;flex-wrap:wrap;gap:10px;}
   .tag{font-size:13.5px;font-weight:500;color:var(--text-2);background:var(--white);border:1px solid var(--border);border-radius:var(--radius-pill);padding:9px 16px;}
@@ -146,7 +141,7 @@
   .decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
   .decision-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px;}
   .decision-icon{font-size:26px;margin-bottom:16px;}
-  .decision-amount{font-size:19px;font-weight:700;font-family:'Geologica',sans-serif;margin-bottom:6px;}
+  .decision-amount{font-size:19px;font-weight:400;font-family:'Zen Antique Soft',serif;margin-bottom:6px;}
   .decision-amount.gold{color:var(--gold);}
   .decision-amount.blue{color:var(--accent);}
   .decision-desc{font-size:13.5px;color:var(--text-3);line-height:1.5;}
@@ -155,7 +150,7 @@
   .mentor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
   .mentor-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:transform .15s,box-shadow .15s;}
   .mentor-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-  .mentor-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;color:#fff;font-size:16px;margin-bottom:14px;}
+  .mentor-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;color:#fff;font-size:16px;margin-bottom:14px;}
   .mentor-name{font-size:15.5px;font-weight:600;margin-bottom:2px;}
   .mentor-role{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:10px;}
   .mentor-desc{font-size:13px;color:var(--text-3);line-height:1.5;}
@@ -188,7 +183,7 @@
 
   /* footer */
   .footer{padding:48px 24px;text-align:center;background:#05060a;color:rgba(255,255,255,.4);}
-  .footer-logo{font-family:'Geologica',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;margin-bottom:10px;display:inline-block;}
+  .footer-logo{font-family:'Zen Antique Soft',serif;font-weight:400;font-size:17px;color:#fff;text-decoration:none;margin-bottom:10px;display:inline-block;}
   .footer-note{font-size:13px;}
 
   ::selection{background:var(--accent);color:#fff;}
@@ -198,7 +193,18 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo-wrap"><span class="nav-badge">E</span><span class="nav-wordmark">ELEVATOR</span></a>
+    <a href="#" class="nav-logo-wrap">
+      <span class="nav-badge">
+        <svg viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill="var(--accent)" d="M0 8.539v8.922c0 1.458.808 2.804 2.122 3.533l8.043 4.46c1.313.728 2.93.728 4.247 0l8.043-4.46c1.313-.73 2.122-2.075 2.122-3.533V8.539c0-1.458-.809-2.804-2.122-3.533L14.412.546a4.396 4.396 0 0 0-4.247 0l-8.043 4.46C.808 5.736 0 7.081 0 8.539Z"></path>
+          <rect x="7.6" y="5.9" width="9.8" height="14.2" rx="2.2" stroke="#fff" stroke-width="1.5"></rect>
+          <line x1="12.5" y1="6.9" x2="12.5" y2="19" stroke="#fff" stroke-width="1.3"></line>
+          <path d="M9.6 9.4l2.9-2.7 2.9 2.7" stroke="#fff" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M9.6 16.6l2.9 2.7 2.9-2.7" stroke="#fff" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
+      <span class="nav-wordmark">Elevator</span>
+    </a>
     <div class="nav-spacer"></div>
     <div class="nav-links">
       <a href="#bootcamp" class="nav-link">Bootcamp №1</a>
@@ -214,7 +220,7 @@
 <div class="hero-wrap">
   <div class="hero-grid">
     <div class="hero-left">
-      <div class="hero-eyebrow"><span class="dot"></span>Набор открыт · Bootcamp №1</div>
+      <div class="hero-eyebrow"><span class="dot"></span>Набор открыт: Bootcamp №1</div>
       <h1 class="hero-title">3 минуты, <span class="hl">которые могут</span> изменить твою жизнь</h1>
       <p class="hero-sub">Инвестиционное шоу, конкурс AI-стартапов и интенсив по маркетингу и публичным выступлениям — в одном проекте.</p>
       <div class="hero-ctas">

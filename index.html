@@ -120,6 +120,38 @@
   .floor-plate.basement{background:var(--hero-navy);border-color:var(--hero-navy);color:#fff;}
   .floor-row .section-label{margin-bottom:0;}
 
+  /* ── FLOOR DIVIDER · exposed slab between floors ── */
+  .floor-divider{position:relative;height:52px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:
+      repeating-linear-gradient(180deg, rgba(0,0,0,.07) 0 2px, transparent 2px 21px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 1px, transparent 1px 58px),
+      linear-gradient(180deg,#d7d2c7,#a9a296);
+    border-top:1px solid rgba(0,0,0,.18);border-bottom:1px solid rgba(0,0,0,.18);
+    box-shadow:inset 0 4px 10px rgba(0,0,0,.18), inset 0 -4px 10px rgba(0,0,0,.12);
+  }
+  .floor-divider::before{content:'';position:absolute;left:0;right:0;top:50%;height:3px;transform:translateY(-50%);background:linear-gradient(90deg,#8a8478 0%,#e9e5db 12%,#8a8478 24%,#8a8478 40%,#e9e5db 52%,#8a8478 64%,#8a8478 80%,#e9e5db 90%,#8a8478 100%);opacity:.55;}
+  .floor-divider-plate{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;background:var(--hero-navy);color:#fff;padding:7px 16px 7px 8px;border-radius:var(--radius-pill);box-shadow:0 4px 14px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.06);}
+  .floor-divider-num{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Geologica',sans-serif;font-weight:700;font-size:12.5px;flex-shrink:0;}
+  .floor-divider-label{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.02em;color:rgba(255,255,255,.85);white-space:nowrap;}
+
+  /* ── FULL-BLEED FLOOR SPLIT (illustration = half the screen) ── */
+  .floor-split{display:grid;grid-template-columns:1fr;}
+  @media(min-width:980px){.floor-split{grid-template-columns:1fr 1fr;align-items:stretch;}}
+  .floor-split-text{padding:72px 40px;display:flex;flex-direction:column;justify-content:center;}
+  @media(min-width:980px){.floor-split-text{padding:72px 64px;}}
+  .floor-split-text-inner{max-width:560px;margin-left:auto;}
+  @media(min-width:980px){.floor-split-text-inner{margin-left:auto;margin-right:0;}}
+  .floor-split-image{position:relative;min-height:340px;overflow:hidden;background:#0b0d16;}
+  @media(min-width:980px){.floor-split-image{min-height:100%;}}
+  .floor-split-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .floor-split.reverse{grid-template-columns:1fr;}
+  @media(min-width:980px){.floor-split.reverse{grid-template-columns:1fr 1fr;}
+    .floor-split.reverse .floor-split-image{order:-1;}
+    .floor-split.reverse .floor-split-text-inner{margin-left:0;margin-right:auto;}
+  }
+  .hero-split{min-height:100vh;}
+  .hero-split .floor-split-text{padding-top:132px;}
+
   /* ── ASCEND NUDGE ── */
   .ascend{padding:64px 24px;text-align:center;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .ascend-icon{font-size:26px;color:var(--accent);margin-bottom:14px;animation:bob 1.8s ease-in-out infinite;}
@@ -274,9 +306,9 @@
 </div>
 
 <!-- ── HERO / КРЫША ── -->
-<div class="hero-wrap" id="hero">
-  <div class="hero-grid">
-    <div class="hero-left">
+<section class="floor-split hero-split" id="hero">
+  <div class="floor-split-text">
+    <div class="floor-split-text-inner">
       <div class="hero-eyebrow"><span class="dot"></span>Набор открыт: Bootcamp №1</div>
       <h1 class="hero-title">3 минуты, <span class="hl">которые могут</span> изменить твою жизнь</h1>
       <p class="hero-sub">Инвестиционное шоу, конкурс AI-стартапов и интенсив по маркетингу и публичным выступлениям — в одном проекте.</p>
@@ -298,52 +330,52 @@
         </span>
       </button>
     </div>
-    <div class="hero-right">
-      <div class="hero-image-card">
-        <img src="hero-sky.jpg" alt="Elevator Pitch — участник презентует стартап инвестиционному комитету на сцене">
-        <div class="hero-image-badge"><span class="dot"></span>Прямое решение</div>
-        <div class="hero-image-footer"><span>Путь участника</span><span>MVP → выручка → инвестиции</span></div>
-      </div>
-    </div>
   </div>
+  <div class="floor-split-image">
+    <img src="hero-sky.jpg" alt="Elevator Pitch — участник презентует стартап инвестиционному комитету на сцене">
+    <div class="hero-image-badge"><span class="dot"></span>Прямое решение</div>
+    <div class="hero-image-footer"><span>Путь участника</span><span>MVP → выручка → инвестиции</span></div>
+  </div>
+</section>
+
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">7</span><span class="floor-divider-label">Как устроено шоу</span></div>
 </div>
 
 <!-- ── КАК УСТРОЕНО ШОУ ── -->
-<section class="section" id="show">
-  <div class="section-inner section-inner-wide">
-    <div class="floor-row"><div class="floor-plate">7</div><div class="section-label">Как устроено шоу</div></div>
+<section class="floor-split" id="show">
+  <div class="floor-split-text">
+    <div class="floor-split-text-inner">
+      <div class="section-label">Как устроено шоу</div>
+      <h2 class="section-title">Elevator Pitch — не только шоу</h2>
+      <p class="section-desc" style="margin-bottom:28px;">Это открытый Demo Day акселератора Elevator перед Инвестиционным комитетом фонда brainbox_I. То, что происходит на экране, — реальное заседание комитета. Свой проект вы будете питчить лично двум инвестиционным директорам фонда.</p>
 
-    <div class="floor-grid">
-      <div class="floor-grid-text">
-        <h2 class="section-title">Elevator Pitch — не только шоу</h2>
-        <p class="section-desc" style="margin-bottom:28px;">Это открытый Demo Day акселератора Elevator перед Инвестиционным комитетом фонда brainbox_I. То, что происходит на экране, — реальное заседание комитета. Свой проект вы будете питчить лично двум инвестиционным директорам фонда.</p>
-
-        <div class="committee-row">
-          <div class="committee-card">
-            <div class="committee-avatar">СЕ</div>
-            <div class="committee-name">Сергей Егоров</div>
-            <div class="committee-role">Управляющий фонда brainbox_I</div>
-          </div>
-          <div class="committee-card">
-            <div class="committee-avatar">ВЩ</div>
-            <div class="committee-name">Виталий Щипков</div>
-            <div class="committee-role">Управляющий фонда brainbox_I</div>
-          </div>
+      <div class="committee-row">
+        <div class="committee-card">
+          <div class="committee-avatar">СЕ</div>
+          <div class="committee-name">Сергей Егоров</div>
+          <div class="committee-role">Управляющий фонда brainbox_I</div>
         </div>
-
-        <p class="section-desc" style="margin-top:24px;margin-bottom:0;">Сергей и Виталий слушают питчи стартапов по итогам Bootcamp. В финал, на сцену Elevator Pitch, выходят не все — только те, кто был активен всю программу и показал реальный результат.</p>
-      </div>
-
-      <div class="floor-grid-image">
-        <div class="hero-image-card">
-          <img src="floor7-sky.jpg" alt="Сергей Егоров и Виталий Щипков — инвестиционный комитет фонда brainbox_I перед заседанием">
-          <div class="hero-image-badge"><span class="dot"></span>Заседание инвесткомитета</div>
-          <div class="hero-image-footer"><span>Сергей Егоров · Виталий Щипков</span><span>brainbox_I</span></div>
+        <div class="committee-card">
+          <div class="committee-avatar">ВЩ</div>
+          <div class="committee-name">Виталий Щипков</div>
+          <div class="committee-role">Управляющий фонда brainbox_I</div>
         </div>
       </div>
+
+      <p class="section-desc" style="margin-top:24px;margin-bottom:0;">Сергей и Виталий слушают питчи стартапов по итогам Bootcamp. В финал, на сцену Elevator Pitch, выходят не все — только те, кто был активен всю программу и показал реальный результат.</p>
     </div>
+  </div>
+  <div class="floor-split-image">
+    <img src="floor7-sky.jpg" alt="Сергей Егоров и Виталий Щипков — инвестиционный комитет фонда brainbox_I перед заседанием">
+    <div class="hero-image-badge"><span class="dot"></span>Заседание инвесткомитета</div>
+    <div class="hero-image-footer"><span>Сергей Егоров · Виталий Щипков</span><span>brainbox_I</span></div>
+  </div>
+</section>
 
-    <div class="show-grid" style="margin-top:56px;">
+<section class="section" style="padding-top:56px;">
+  <div class="section-inner section-inner-wide">
+    <div class="show-grid">
       <div class="show-card"><div class="show-num">01</div><h3>Выход на сцену</h3><p>Участник выходит один. Перед ним — Сергей и Виталий, инвестиционные директора brainbox_I.</p></div>
       <div class="show-card"><div class="show-num">02</div><h3>3 минуты питча</h3><p>Без слайдов на 40 минут. Только суть: продукт, метрики, команда, амбиции.</p></div>
       <div class="show-card"><div class="show-num">03</div><h3>Вопросы комитета</h3><p>Жёсткие, точные вопросы от людей, которые реально управляют деньгами.</p></div>
@@ -352,10 +384,14 @@
   </div>
 </section>
 
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">6</span><span class="floor-divider-label">Путь участника</span></div>
+</div>
+
 <!-- ── ПУТЬ УЧАСТНИКА ── -->
 <section class="section divider" id="path">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">6</div><div class="section-label">Путь участника</div></div>
+    <div class="section-label">Путь участника</div>
     <h2 class="section-title">От заявки до сцены</h2>
     <div class="stepper">
       <div class="step"><div class="step-marker"><div class="step-dot">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Подача заявки</div><div class="step-desc">Рассказываешь о себе, идее или готовом проекте</div></div></div>
@@ -368,9 +404,13 @@
 </section>
 
 <!-- ── ЧТО ПРОИСХОДИТ В BOOTCAMP ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">5</span><span class="floor-divider-label">Что происходит в Bootcamp</span></div>
+</div>
+
 <section class="section divider" id="bootcamp">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">5</div><div class="section-label">Что происходит в Bootcamp</div></div>
+    <div class="section-label">Что происходит в Bootcamp</div>
     <h2 class="section-title">8 недель. 8 уровней. Каждый — как уровень игры.</h2>
     <p class="section-desc">Следующий уровень открывается только после того, как куратор принял домашнее задание. Прогресс нельзя купить или проскроллить — только пройти.</p>
     <div class="level-grid">
@@ -387,9 +427,13 @@
 </section>
 
 <!-- ── ЭТАЖ 4 · РЫНОК СЕГОДНЯ ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">4</span><span class="floor-divider-label">Рынок сегодня</span></div>
+</div>
+
 <section class="section divider" id="floor-4">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">4</div><div class="section-label">Рынок сегодня</div></div>
+    <div class="section-label">Рынок сегодня</div>
     <p class="statement">Раньше нужна была команда разработчиков. <span class="muted">Сегодня достаточно одного человека и AI.</span></p>
     <div class="tag-row" style="margin-bottom:44px;">
       <div class="tag">Vibe Coding вместо найма</div>
@@ -408,9 +452,13 @@
 </section>
 
 <!-- ── ЭТАЖ 3 · ПОСЛЕ BOOTCAMP ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">3</span><span class="floor-divider-label">После Bootcamp</span></div>
+</div>
+
 <section class="section divider" id="floor-3">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">3</div><div class="section-label">После Bootcamp</div></div>
+    <div class="section-label">После Bootcamp</div>
     <h2 class="section-title">Demo Day решает, кто идёт на сцену</h2>
     <p class="section-desc">На Demo Day каждая команда показывает результат восьми недель работы — трекшн, метрики, готовность продукта. Менторы и инвестиционный комитет оценивают готовность, и лучшие проекты получают приглашение на Elevator Pitch.</p>
     <h3 style="font-size:15px;font-weight:700;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:20px;">Что может произойти на сцене</h3>
@@ -424,9 +472,13 @@
 </section>
 
 <!-- ── МЕНТОРЫ ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">2</span><span class="floor-divider-label">Менторы</span></div>
+</div>
+
 <section class="section divider" id="mentors">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">2</div><div class="section-label">Менторы</div></div>
+    <div class="section-label">Менторы</div>
     <h2 class="section-title">Действующие предприниматели и инвесторы</h2>
     <p class="section-desc">Не преподаватели курсов. Люди, которые сами прошли путь от MVP до выручки и инвестиций — и сопровождают команды лично, всю программу.</p>
     <div class="mentor-grid">
@@ -441,9 +493,13 @@
 </section>
 
 <!-- ── FAQ ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">1</span><span class="floor-divider-label">FAQ</span></div>
+</div>
+
 <section class="section divider" id="faq">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate">1</div><div class="section-label">FAQ</div></div>
+    <div class="section-label">FAQ</div>
     <h2 class="section-title" style="margin-bottom:8px;">Частые вопросы</h2>
     <div style="margin-top:32px;">
       <div class="faq-item open">
@@ -471,9 +527,13 @@
 </section>
 
 <!-- ── PRODUCT GALLERY ── -->
+<div class="floor-divider">
+  <div class="floor-divider-plate"><span class="floor-divider-num">Б1</span><span class="floor-divider-label">Закрытая платформа</span></div>
+</div>
+
 <section class="section screens-section" id="product">
   <div class="section-inner">
-    <div class="floor-row"><div class="floor-plate basement">Б1</div><div class="section-label">Закрытая платформа</div></div>
+    <div class="section-label">Закрытая платформа</div>
     <h2 class="section-title">Цифровой кампус Bootcamp</h2>
     <p class="section-desc">Не курс и не LMS. Живая среда, в которой предприниматели восемь недель видят прогресс друг друга, публикуют эксперименты и готовятся к Demo Day вместе.</p>
 

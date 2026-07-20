@@ -134,6 +134,16 @@
   .section-desc{font-size:17px;color:var(--text-2);line-height:1.65;max-width:640px;margin-bottom:48px;}
   .divider{border-top:1px solid var(--border);}
 
+  /* floor two-column layout (reused on floor sections, matches hero-grid) */
+  .floor-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;}
+  @media(min-width:980px){.floor-grid{grid-template-columns:1.05fr 1fr;}}
+
+  .committee-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .committee-card{flex:1;min-width:170px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;}
+  .committee-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0b2aa8);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;color:#fff;font-size:14px;margin-bottom:12px;}
+  .committee-name{font-size:14.5px;font-weight:700;margin-bottom:2px;}
+  .committee-role{font-size:12px;color:var(--text-3);}
+
   /* how the show works */
   .show-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
   .show-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 24px;box-shadow:var(--shadow);}
@@ -301,13 +311,42 @@
 <section class="section" id="show">
   <div class="section-inner">
     <div class="floor-row"><div class="floor-plate">7</div><div class="section-label">Этаж 7 · Как устроено шоу</div></div>
-    <h2 class="section-title">Реальные питчи. Реальные деньги. Реальное решение — вживую.</h2>
-    <p class="section-desc">Elevator Pitch — это не мотивационная конференция. Это формат, в котором инвестиционное решение принимается на сцене, при зрителях, за считаные минуты.</p>
-    <div class="show-grid">
-      <div class="show-card"><div class="show-num">01</div><h3>Выход на сцену</h3><p>Участник выходит один. Перед ним — инвестиционный комитет фонда Brainbox.</p></div>
+
+    <div class="floor-grid">
+      <div class="floor-grid-text">
+        <h2 class="section-title">Реальные питчи. Реальные деньги. Реальное решение — вживую.</h2>
+        <p class="section-desc" style="margin-bottom:28px;"><b style="color:var(--text);">Последний этаж перед сценой.</b> Это не шоу в привычном смысле. То, что происходит на экране, — реальное заседание инвестиционного комитета фонда brainbox_I. Свой проект вы будете питчить лично двум инвестиционным директорам фонда.</p>
+
+        <div class="committee-row">
+          <div class="committee-card">
+            <div class="committee-avatar">СЕ</div>
+            <div class="committee-name">Сергей Егоров</div>
+            <div class="committee-role">Управляющий фонда brainbox_I</div>
+          </div>
+          <div class="committee-card">
+            <div class="committee-avatar">ВЩ</div>
+            <div class="committee-name">Виталий Щипков</div>
+            <div class="committee-role">Управляющий фонда brainbox_I</div>
+          </div>
+        </div>
+
+        <p class="section-desc" style="margin-top:24px;margin-bottom:0;">Сергей и Виталий слушают питчи стартапов по итогам Bootcamp. В финал, на сцену Elevator Pitch, выходят не все — только те, кто был активен всю программу и показал реальный результат.</p>
+      </div>
+
+      <div class="floor-grid-image">
+        <div class="hero-image-card">
+          <img src="floor7-sky.jpg" alt="Сергей Егоров и Виталий Щипков — инвестиционный комитет фонда brainbox_I перед заседанием">
+          <div class="hero-image-badge"><span class="dot"></span>Заседание инвесткомитета</div>
+          <div class="hero-image-footer"><span>Сергей Егоров · Виталий Щипков</span><span>brainbox_I</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="show-grid" style="margin-top:56px;">
+      <div class="show-card"><div class="show-num">01</div><h3>Выход на сцену</h3><p>Участник выходит один. Перед ним — Сергей и Виталий, инвестиционные директора brainbox_I.</p></div>
       <div class="show-card"><div class="show-num">02</div><h3>3 минуты питча</h3><p>Без слайдов на 40 минут. Только суть: продукт, метрики, команда, амбиции.</p></div>
       <div class="show-card"><div class="show-num">03</div><h3>Вопросы комитета</h3><p>Жёсткие, точные вопросы от людей, которые реально управляют деньгами.</p></div>
-      <div class="show-card"><div class="show-num">04</div><h3>Решение вживую</h3><p>Инвестиция, менторство или отказ — комитет объявляет решение сразу, на сцене.</p></div>
+      <div class="show-card"><div class="show-num">04</div><h3>Решение вживую</h3><p>Инвестиция, менторство или отказ — решение объявляют сразу, на сцене.</p></div>
     </div>
   </div>
 </section>

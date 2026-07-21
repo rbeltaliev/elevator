@@ -154,6 +154,17 @@
   .hero-split{min-height:100vh;}
   .hero-split .floor-split-text{padding-top:132px;}
 
+  /* ── FOUNDER / ФУНДАМЕНТ ── */
+  .floor-split.dark{background:linear-gradient(180deg,#0b0d16,#05060a);}
+  .floor-split.dark .section-label{color:#6fa3f2;}
+  .founder-title{font-family:'Zen Antique Soft',serif;font-weight:400;font-size:clamp(26px,3.4vw,34px);color:#fff;line-height:1.28;margin-bottom:22px;}
+  .founder-p{font-size:15.5px;line-height:1.75;color:rgba(255,255,255,.68);margin-bottom:16px;}
+  .founder-signoff{margin-top:26px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);}
+  .founder-name{font-family:'Zen Antique Soft',serif;font-size:17px;color:#fff;margin-bottom:2px;}
+  .founder-role{font-size:12.5px;color:rgba(255,255,255,.48);margin-bottom:18px;}
+  .founder-tg{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-pill);padding:10px 18px;text-decoration:none;transition:background .15s,border-color .15s,transform .15s;}
+  .founder-tg:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.32);transform:translateY(-1px);}
+
   /* ── ASCEND NUDGE ── */
   .ascend{padding:64px 24px;text-align:center;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .ascend-icon{font-size:26px;color:var(--accent);margin-bottom:14px;animation:bob 1.8s ease-in-out infinite;}
@@ -570,6 +581,26 @@
   <p class="cta-bottom-desc">Приём заявок в ближайший Bootcamp открыт. Восемь недель отделяют тебя от Demo Day и, возможно, от собственной компании.</p>
   <a href="#" class="btn btn-primary btn-lg">Подать заявку →</a>
 </div>
+
+<!-- ── ФУНДАМЕНТ · ОТ ОСНОВАТЕЛЯ ── -->
+<section class="floor-split dark reverse" id="founder">
+  <div class="floor-split-text">
+    <div class="floor-split-text-inner">
+      <div class="section-label">Фундамент · от основателя</div>
+      <h2 class="founder-title">Почему это называется Elevator</h2>
+      <p class="founder-p">Я назвал проект Elevator, потому что хочу помочь тем, кому интересно — но не всё получается. Мы работаем с теми, кто уже навайбкодил свой первый сервис и не знает, что делать дальше.</p>
+      <p class="founder-p">В Elevator — мой личный опыт: что такое маркетинг на самом деле и как ценность продукта определяет его популярность. Это не курс. Это лифт, который поднимает от идеи к пониманию, что значит быть предпринимателем — рядом с другими, кто идёт тем же путём.</p>
+      <div class="founder-signoff">
+        <div class="founder-name">Альберт Алиев</div>
+        <div class="founder-role">Основатель Elevator и brainbox.VC</div>
+        <a href="https://t.me/rbelt" target="_blank" rel="noopener" class="founder-tg">✈ Написать в Telegram — @rbelt</a>
+      </div>
+    </div>
+  </div>
+  <div class="floor-split-image">
+    <img src="founder-photo.jpg" alt="Альберт Алиев — основатель Elevator и brainbox.VC">
+  </div>
+</section>
 
 <footer class="footer">
   <a href="#" class="footer-logo">Elevator Pitch</a>
